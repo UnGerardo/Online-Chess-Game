@@ -6,10 +6,18 @@ import grid
 class Pawn(chesspiece.ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
+        self.firstPos = (x, y)
         self.firstMove = True
 
     def getMoves(self, piecesArr):
-        self.possibleMoves = [(self.x, self.y - 1), (self.x, self.y - 2)]
+        if self.firstMove:
+            if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
+                self.possibleMoves = [(self.x, self.y - 1), (self.x, self.y - 2)]
+            else:
+                self.possibleMoves = [(self.x, self.y - 1)]
+                self.firstMove = False
+        else:
+            self.possibleMoves = [(self.x, self.y - 1)]
 
         # see if any possible spaces to move to are taken
         for piece in piecesArr:
