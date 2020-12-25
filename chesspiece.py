@@ -5,8 +5,10 @@ import grid
 class ChessPiece:
     def __init__(self, name, x, y, image):
         self.name = name
-        self.pos = (x, y)
+        self.x = x
+        self.y = y
         self.image = pygame.image.load(image)
+        self.selected = False
         self.captured = False
 
     def killed(self):
@@ -14,6 +16,6 @@ class ChessPiece:
 
     def show(self, display):
         display.blit(self.image, (
-                                 ((self.pos[0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                 ((self.pos[1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE)
+                                 ((self.x * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
+                                 ((self.y * grid.SQUARE_SIZE) - grid.SQUARE_SIZE)
                                  ))

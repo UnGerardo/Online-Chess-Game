@@ -28,5 +28,5 @@ class Grid:
             counter += 1
             top += SQUARE_SIZE
 
-    def showGrid(self):
+    def show(self):
         pygame.display.flip()
