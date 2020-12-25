@@ -8,15 +8,14 @@ class Pawn(piece.ChessPiece):
         super().__init__(name, x, y, image)
         self.firstMove = True
 
+    def getMoves(self):
+        self.possibleMoves = [(self.x, self.y - 1), (self.x, self.y - 2)]
+
     def showMoves(self, display):
-        if self.selected:
-            pygame.draw.rect(display,
-                             '#009900',
-                             pygame.Rect(((self.x * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                         (((self.y - 1) * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                         grid.SQUARE_SIZE, grid.SQUARE_SIZE))
-            pygame.draw.rect(display,
-                             '#00CC00',
-                             pygame.Rect(((self.x * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                         (((self.y - 2) * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                         grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+        for move in self.possibleMoves:
+            if self.selected:
+                pygame.draw.rect(display,
+                                 '#009900',
+                                 pygame.Rect(((move[0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
+                                             ((move[1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
+                                             grid.SQUARE_SIZE, grid.SQUARE_SIZE))
