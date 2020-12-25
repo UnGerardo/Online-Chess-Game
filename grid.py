@@ -1,12 +1,13 @@
 import pygame
 
+WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 600
+SQUARE_SIZE = 75
+
 
 class Grid:
     def __init__(self):
-        self.WINDOW_HEIGHT = 600
-        self.WINDOW_WIDTH = 600
-        self.SQUARE_SIZE = 75
-        self.screen = pygame.display.set_mode(size=(self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
+        self.screen = pygame.display.set_mode(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
 
     def setScreen(self):
         pygame.display.set_caption("Chess")  # set window title
@@ -19,13 +20,13 @@ class Grid:
             left = 0
             for j in range(8):
                 if counter % 2:
-                    pygame.draw.rect(self.screen, '#000000', pygame.Rect(left, top, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    pygame.draw.rect(self.screen, '#000000', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
                 else:
-                    pygame.draw.rect(self.screen, '#ffffff', pygame.Rect(left, top, self.SQUARE_SIZE, self.SQUARE_SIZE))
-                left += self.SQUARE_SIZE
+                    pygame.draw.rect(self.screen, '#ffffff', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
+                left += SQUARE_SIZE
                 counter += 1
             counter += 1
-            top += self.SQUARE_SIZE
+            top += SQUARE_SIZE
 
     def showGrid(self):
         pygame.display.flip()
