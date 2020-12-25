@@ -35,6 +35,7 @@ if __name__ == '__main__':
                             pieceSelected = False
                             piece.x = mousePos[0]
                             piece.y = mousePos[1]
+                            chessGrid.drawGrid()
                 else:
                     for piece in pieces:
                         if mousePos[0] == piece.x and mousePos[1] == piece.y:
