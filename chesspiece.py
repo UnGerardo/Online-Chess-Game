@@ -10,7 +10,7 @@ class ChessPiece:
         self.image = pygame.image.load(image)
         self.selected = False
         self.captured = False
-        self.possibleMoves = []
+        self.possibleMoves = [0, 0]
 
     def killed(self):
         self.captured = True
