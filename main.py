@@ -29,13 +29,19 @@ if __name__ == '__main__':
                 mousePos = (getMousePosition(0), getMousePosition(1))
                 print(mousePos)
                 if pieceSelected:
+                    currentPiece = None
+                    openSpace = True
                     for piece in pieces:
+                        if mousePos[0] == piece.x and mousePos[1] == piece.y:
+                            openSpace = False
                         if piece.selected:
-                            piece.selected = False
-                            pieceSelected = False
-                            piece.x = mousePos[0]
-                            piece.y = mousePos[1]
-                            chessGrid.drawGrid()
+                            currentPiece = piece
+                    if openSpace:
+                        currentPiece.selected = False
+                        pieceSelected = False
+                        currentPiece.x = mousePos[0]
+                        currentPiece.y = mousePos[1]
+                        chessGrid.drawGrid()
                 else:
                     for piece in pieces:
                         if mousePos[0] == piece.x and mousePos[1] == piece.y:
