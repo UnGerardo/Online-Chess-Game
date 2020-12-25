@@ -50,3 +50,4 @@ if __name__ == '__main__':
 
         for piece in pieces:
             piece.show(chessGrid.screen)
+            piece.showMoves(chessGrid.screen)
