@@ -9,8 +9,8 @@ class Pawn(chesspiece.ChessPiece):
         self.firstPos = (x, y)
         self.firstMove = True
 
-    # make faster with piecesLocation
-    def getMoves(self, piecesArr):
+    def getMoves(self, piecesDict):
+        # get possible moves
         if self.firstMove:
             if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
                 self.possibleMoves = [(self.x, self.y - 1), (self.x, self.y - 2)]
@@ -20,15 +20,16 @@ class Pawn(chesspiece.ChessPiece):
         else:
             self.possibleMoves = [(self.x, self.y - 1)]
 
-        # see if any possible spaces to move to are taken
-        for piece in piecesArr:
-            for i in range(len(self.possibleMoves)):
-                if self.possibleMoves[i][0] == piece.x and self.possibleMoves[i][1] == piece.y:
-                    self.possibleMoves[i] = 0
+        # go through possible moves and see if any are taken, set to 0
+        for i in range(len(self.possibleMoves)):
+            if piecesDict[self.possibleMoves[i][0]][self.possibleMoves[i][1]]:
+                self.possibleMoves[i] = 0
 
+        # if piece above but can move two spaces, prevent from moving to second
         if not self.possibleMoves[0] and self.firstMove:
             self.possibleMoves[1] = 0
 
+    # consider placing showMoves in show method in chesspiece
     def showMoves(self, display):
         if self.selected and self.possibleMoves[0]:
             for move in self.possibleMoves:

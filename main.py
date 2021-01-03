@@ -8,9 +8,9 @@ def getMousePosition(value):
     return math.ceil((pygame.mouse.get_pos())[value]/grid.SQUARE_SIZE)
 
 
-def changePiece(newPiece, piecesArr):
+def changePiece(newPiece, piecesDict):
     newPiece.selected = True
-    newPiece.getMoves(piecesArr)
+    newPiece.getMoves(piecesDict)
     return newPiece
 
 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
                     # if the user selects a piece after another, change selection
                     if pieceLocations[mousePos[0]][mousePos[1]]:
                         currentPiece.selected = False
-                        currentPiece = changePiece(pieceLocations[mousePos[0]][mousePos[1]], pieces)
+                        currentPiece = changePiece(pieceLocations[mousePos[0]][mousePos[1]], pieceLocations)
                     # else check if desired move is available and move if it is
                     elif canMove(currentPiece, mousePos):
                         pieceSelected = False
@@ -146,20 +146,23 @@ if __name__ == '__main__':
                 else:
                     if pieceLocations[mousePos[0]][mousePos[1]]:
                         pieceSelected = True
-                        currentPiece = changePiece(pieceLocations[mousePos[0]][mousePos[1]], pieces)
+                        currentPiece = changePiece(pieceLocations[mousePos[0]][mousePos[1]], pieceLocations)
 
             if event.type == pygame.KEYDOWN:
                 print(pieceLocations)
                 print(currentPiece.x)
                 print(currentPiece.y)
-                # for piece in pieces:
-                #     print(str(piece.x) + " " + str(piece.y) + " " + str(piece.selected)
-                #           + " " + str(piece.possibleMoves)
-                #           )
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
 
-        for piece in pieces:
-            piece.show(chessGrid.screen)
-            piece.showMoves(chessGrid.screen)
+        # loops through pieceLocations dict to show pieces
+        for col in range(8):
+            for row in range(8):
+                piece = pieceLocations[col+1][row+1]
+                if piece:
+                    piece.show(chessGrid.screen)
+                    piece.showMoves(chessGrid.screen)
+        # for piece in pieces:
+        #     piece.show(chessGrid.screen)
+        #     piece.showMoves(chessGrid.screen)
