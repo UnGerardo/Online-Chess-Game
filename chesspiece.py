@@ -20,3 +20,8 @@ class ChessPiece:
                                  ((self.x * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
                                  ((self.y * grid.SQUARE_SIZE) - grid.SQUARE_SIZE)
                                  ))
+
+    def move(self, mousePos):
+        self.selected = False
+        self.x = mousePos[0]
+        self.y = mousePos[1]

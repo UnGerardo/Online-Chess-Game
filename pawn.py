@@ -9,6 +9,7 @@ class Pawn(chesspiece.ChessPiece):
         self.firstPos = (x, y)
         self.firstMove = True
 
+    # make faster with piecesLocation
     def getMoves(self, piecesArr):
         if self.firstMove:
             if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
@@ -25,7 +26,7 @@ class Pawn(chesspiece.ChessPiece):
                 if self.possibleMoves[i][0] == piece.x and self.possibleMoves[i][1] == piece.y:
                     self.possibleMoves[i] = 0
 
-        if not self.possibleMoves[0]:
+        if not self.possibleMoves[0] and self.firstMove:
             self.possibleMoves[1] = 0
 
     def showMoves(self, display):
