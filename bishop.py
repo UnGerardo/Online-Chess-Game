@@ -22,6 +22,30 @@ class Bishop(chesspiece.ChessPiece):
             self.possibleMoves[0].append((self.x + shift, self.y - shift))
             shift += 1
 
+        # get bottom right moves
+        shift = 1
+        while (self.x+shift <= 8) and (self.y+shift <= 8) and (not piecesDict[self.x+shift][self.y+shift]):
+            if shift == 1:
+                self.possibleMoves[1] = ll.LinkedList((self.x+shift, self.y+shift))
+            self.possibleMoves[1].append((self.x + shift, self.y + shift))
+            shift += 1
+
+        # get bottom left moves
+        shift = 1
+        while (self.x-shift >= 1) and (self.y+shift <= 8) and (not piecesDict[self.x-shift][self.y+shift]):
+            if shift == 1:
+                self.possibleMoves[2] = ll.LinkedList((self.x-shift, self.y+shift))
+            self.possibleMoves[2].append((self.x - shift, self.y + shift))
+            shift += 1
+
+        # get top left moves
+        shift = 1
+        while (self.x-shift >= 1) and (self.y-shift >= 1) and (not piecesDict[self.x-shift][self.y-shift]):
+            if shift == 1:
+                self.possibleMoves[3] = ll.LinkedList((self.x-shift, self.y-shift))
+            self.possibleMoves[3].append((self.x - shift, self.y - shift))
+            shift += 1
+
     # showMoves method for each piece bc need to determine if any straight line is blocked (see second condition in if)
     def showMoves(self, display):
         if self.selected:
