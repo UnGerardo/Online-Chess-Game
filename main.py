@@ -49,7 +49,7 @@ if __name__ == '__main__':
         },
         2: {
             1: None,
-            2: b.Bishop('bBishop', 2, 2, "images/bishop.png"),
+            2: None,
             3: None,
             4: None,
             5: None,
@@ -82,7 +82,7 @@ if __name__ == '__main__':
             2: None,
             3: None,
             4: None,
-            5: None,
+            5: b.Bishop('bBishop', 5, 5, "images/bishop.png"),
             6: None,
             7: None,
             8: None
@@ -156,6 +156,7 @@ if __name__ == '__main__':
                 print(pieceLocations)
                 print(currentPiece.x)
                 print(currentPiece.y)
+                print(currentPiece.possibleMoves[0].head)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing

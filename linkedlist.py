@@ -12,6 +12,6 @@ class LinkedList:
             'value': value,
             'next': None
         }
-        self.tail.next = newNode
+        self.tail['next'] = newNode
         self.tail = newNode
         self.length += 1

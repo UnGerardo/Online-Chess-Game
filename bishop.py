@@ -1,40 +1,38 @@
 import pygame
 import chesspiece
+import linkedlist as ll
 import grid
 
 
 class Bishop(chesspiece.ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
-        self.possibleMoves = [
-            'forwardRight': 
-        ]
+        # moves linked list order: top right, bottom right, bottom left, top left
+        self.possibleMoves = [0, 0, 0, 0]
 
     def getMoves(self, piecesDict):
-        # get possible moves
-        if self.firstMove:
-            if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
-                self.possibleMoves = [(self.x, self.y - 1), (self.x, self.y - 2)]
-            else:
-                self.possibleMoves = [(self.x, self.y - 1)]
-        else:
-            self.possibleMoves = [(self.x, self.y - 1)]
+        # reset
+        self.possibleMoves = [0, 0, 0, 0]
 
-        # go through possible moves and see if any are taken, set to 0
-        try:
-            for i in range(len(self.possibleMoves)):
-                if piecesDict[self.possibleMoves[i][0]][self.possibleMoves[i][1]]:
-                    self.possibleMoves[i] = 0
-        except KeyError:
-            print('Possible move is out of bounds. Dont need to handle now because Pawn will switch-out in this case.')
+        # get top right moves
+        shift = 1
+        while (self.x+shift <= 8) and (self.y-shift >= 1) and (not piecesDict[self.x+shift][self.y-shift]):
+            if shift == 1:
+                self.possibleMoves[0] = ll.LinkedList((self.x+shift, self.y-shift))
+            self.possibleMoves[0].append((self.x + shift, self.y - shift))
+            shift += 1
 
     # showMoves method for each piece bc need to determine if any straight line is blocked (see second condition in if)
     def showMoves(self, display):
-        if self.selected and self.possibleMoves[0]:
-            for move in self.possibleMoves:
-                if move:
-                    pygame.draw.rect(display,
-                                     '#009900',
-                                     pygame.Rect(((move[0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                 ((move[1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                 grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+        if self.selected:
+            for linlist in self.possibleMoves:
+                if linlist:
+                    currentNode = linlist.head
+                    while currentNode:
+                        if currentNode['value']:
+                            pygame.draw.rect(display,
+                                             '#009900',
+                                             pygame.Rect(((currentNode['value'][0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
+                                                         ((currentNode['value'][1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
+                                                         grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+                        currentNode = currentNode['next']
