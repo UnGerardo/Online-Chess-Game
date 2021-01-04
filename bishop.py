@@ -18,30 +18,42 @@ class Bishop(chesspiece.ChessPiece):
         leftShift = self.x-1
         upShift = self.y-1
         bottomShift = self.y+1
+        topRightBlock = False
+        topLeftBlock = False
+        bottomRightBlock = False
+        bottomLeftBlock = False
         while rightShift <= 8 or leftShift >= 1 or upShift >= 1 or bottomShift <= 8:
             # get top right moves
-            if (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]):
+            if (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]) and (not topRightBlock):
                 if not self.possibleMoves[0]:
                     self.possibleMoves[0] = ll.LinkedList((rightShift, upShift))
                 self.possibleMoves[0].append((rightShift, upShift))
+            else:
+                topRightBlock = True
 
             # get bottom right moves
-            if (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]):
+            if (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]) and (not bottomRightBlock):
                 if not self.possibleMoves[1]:
                     self.possibleMoves[1] = ll.LinkedList((rightShift, bottomShift))
                 self.possibleMoves[1].append((rightShift, bottomShift))
+            else:
+                bottomRightBlock = True
 
             # get bottom left moves
-            if (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]):
+            if (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]) and (not bottomLeftBlock):
                 if not self.possibleMoves[2]:
                     self.possibleMoves[2] = ll.LinkedList((leftShift, bottomShift))
                 self.possibleMoves[2].append((leftShift, bottomShift))
+            else:
+                bottomLeftBlock = True
 
             # get top left moves
-            if (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]):
+            if (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]) and (not topLeftBlock):
                 if not self.possibleMoves[3]:
                     self.possibleMoves[3] = ll.LinkedList((leftShift, upShift))
                 self.possibleMoves[3].append((leftShift, upShift))
+            else:
+                topLeftBlock = True
 
             rightShift += 1
             leftShift -= 1
