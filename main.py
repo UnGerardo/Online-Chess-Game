@@ -63,7 +63,7 @@ if __name__ == '__main__':
             1: None,
             2: None,
             3: None,
-            4: None,
+            4: p.Pawn("bPawn", 4, 4, "images/pawn.png"),
             5: None,
             6: None,
             7: None,

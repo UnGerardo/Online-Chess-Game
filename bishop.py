@@ -63,7 +63,11 @@ class Bishop(chesspiece.ChessPiece):
                         currentNode = currentNode['next']
 
     def validMove(self, mouseP):
-        for move in self.possibleMoves:
-            if move and mouseP[0] == move[0] and mouseP[1] == move[1]:
-                return True
+        for linlist in self.possibleMoves:
+            if linlist:
+                currentNode = linlist.head
+                while currentNode:
+                    if mouseP[0] == currentNode['value'][0] and mouseP[1] == currentNode['value'][1]:
+                        return True
+                    currentNode = currentNode['next']
         return False
