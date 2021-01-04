@@ -1,6 +1,7 @@
 import pygame
 import math
 import pawn as p
+import bishop as b
 import grid
 
 
@@ -48,7 +49,7 @@ if __name__ == '__main__':
         },
         2: {
             1: None,
-            2: None,
+            2: b.Bishop('bBishop', 2, 2, "images/bishop.png"),
             3: None,
             4: None,
             5: None,
@@ -119,7 +120,7 @@ if __name__ == '__main__':
     }
     mousePos = (0, 0)
     pieceSelected = False
-    # currentPiece = None :: see if could ever be undefined and used
+    currentPiece = None # :: see if could ever be undefined and used
     playing = True
     # Game loop
     while playing:
