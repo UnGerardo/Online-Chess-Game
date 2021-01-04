@@ -8,7 +8,7 @@ class Bishop(chesspiece.ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
         # moves linked list order: top right, bottom right, bottom left, top left
-        self.possibleMoves = [0, 0, 0, 0]
+        self.possibleMoves = []
 
     def getMoves(self, piecesDict):
         # reset
@@ -48,7 +48,6 @@ class Bishop(chesspiece.ChessPiece):
             upShift -= 1
             bottomShift += 1
 
-    # showMoves method for each piece bc need to determine if any straight line is blocked (see second condition in if)
     def showMoves(self, display):
         if self.selected:
             for linlist in self.possibleMoves:
@@ -62,3 +61,9 @@ class Bishop(chesspiece.ChessPiece):
                                                          ((currentNode['value'][1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
                                                          grid.SQUARE_SIZE, grid.SQUARE_SIZE))
                         currentNode = currentNode['next']
+
+    def validMove(self, mouseP):
+        for move in self.possibleMoves:
+            if move and mouseP[0] == move[0] and mouseP[1] == move[1]:
+                return True
+        return False

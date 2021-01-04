@@ -15,14 +15,6 @@ def changePiece(newPiece, piecesDict):
     return newPiece
 
 
-# pieces like rooks and bishops could use linked lists to store lines of travel; would need to check piece type
-def validMove(currPiece, mouseP):
-    for move in currPiece.possibleMoves:
-        if move and mouseP[0] == move[0] and mouseP[1] == move[1]:
-            return True
-    return False
-
-
 def updatePiecesLocation(pieceDict, currPiece, mouseP):
     pieceDict[currPiece.x][currPiece.y] = None
     pieceDict[mouseP[0]][mouseP[1]] = currPiece
@@ -142,7 +134,7 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
                     # else check if desired move is valid and move if it is
-                    elif validMove(currentPiece, mousePos):
+                    elif currentPiece.validMove(mousePos):
                         pieceSelected = False
                         updatePiecesLocation(pieceLocations, currentPiece, mousePos)
 

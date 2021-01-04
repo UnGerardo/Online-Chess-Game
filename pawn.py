@@ -33,7 +33,6 @@ class Pawn(chesspiece.ChessPiece):
         if not self.possibleMoves[0] and self.firstMove:
             self.possibleMoves[1] = 0
 
-    # showMoves method for each piece bc need to determine if any straight line is blocked (see second condition in if)
     def showMoves(self, display):
         if self.selected and self.possibleMoves[0]:
             for move in self.possibleMoves:
@@ -43,3 +42,9 @@ class Pawn(chesspiece.ChessPiece):
                                      pygame.Rect(((move[0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
                                                  ((move[1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
                                                  grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+
+    def validMove(self, mouseP):
+        for move in self.possibleMoves:
+            if move and mouseP[0] == move[0] and mouseP[1] == move[1]:
+                return True
+        return False
