@@ -4,65 +4,61 @@ import linkedlist as ll
 import grid
 
 
-class Bishop(chesspiece.ChessPiece):
+class Rook(chesspiece.ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
-        # moves linked list order: top right, bottom right, bottom left, top left
+        # moves linked list order: top, right, bottom, left
         self.possibleMoves = []
 
     def getMoves(self, piecesDict):
         # reset
         self.possibleMoves = [0, 0, 0, 0]
 
-        rightShift = self.x+1
-        leftShift = self.x-1
-        upShift = self.y-1
-        bottomShift = self.y+1
-        trStop = False
-        tlStop = False
-        brStop = False
-        blStop = False
-        while rightShift <= 8 or leftShift >= 1 or upShift >= 1 or bottomShift <= 8:
-            # get top right moves
-            if (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]) and (not trStop):
+        rightShift = self.x + 1
+        leftShift = self.x - 1
+        upShift = self.y - 1
+        bottomShift = self.y + 1
+        tStop = False
+        rStop = False
+        bStop = False
+        lStop = False
+        while (not tStop) or (not rStop) or (not bStop) or (not lStop):
+            # get top moves
+            if (not tStop) and upShift >= 1 and (not piecesDict[self.x][upShift]):
                 if not self.possibleMoves[0]:
-                    self.possibleMoves[0] = ll.LinkedList((rightShift, upShift))
+                    self.possibleMoves[0] = ll.LinkedList((self.x, upShift))
                 else:
-                    self.possibleMoves[0].append((rightShift, upShift))
+                    self.possibleMoves[0].append((self.x, upShift))
             else:
-                trStop = True
-
-            # get bottom right moves
-            if (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]) and (not brStop):
+                tStop = True
+            # get right moves
+            if (not rStop) and rightShift <= 8 and (not piecesDict[rightShift][self.y]):
                 if not self.possibleMoves[1]:
-                    self.possibleMoves[1] = ll.LinkedList((rightShift, bottomShift))
+                    self.possibleMoves[1] = ll.LinkedList((rightShift, self.y))
                 else:
-                    self.possibleMoves[1].append((rightShift, bottomShift))
+                    self.possibleMoves[1].append((rightShift, self.y))
             else:
-                brStop = True
-
-            # get bottom left moves
-            if (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]) and (not blStop):
+                rStop = True
+            # get bottom moves
+            if (not bStop) and bottomShift <= 8 and (not piecesDict[self.x][bottomShift]):
                 if not self.possibleMoves[2]:
-                    self.possibleMoves[2] = ll.LinkedList((leftShift, bottomShift))
+                    self.possibleMoves[2] = ll.LinkedList((self.x, bottomShift))
                 else:
-                    self.possibleMoves[2].append((leftShift, bottomShift))
+                    self.possibleMoves[2].append((self.x, bottomShift))
             else:
-                blStop = True
-
-            # get top left moves
-            if (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]) and (not tlStop):
+                bStop = True
+            # get left moves
+            if (not lStop) and leftShift >= 1 and (not piecesDict[leftShift][self.y]):
                 if not self.possibleMoves[3]:
-                    self.possibleMoves[3] = ll.LinkedList((leftShift, upShift))
+                    self.possibleMoves[3] = ll.LinkedList((leftShift, self.y))
                 else:
-                    self.possibleMoves[3].append((leftShift, upShift))
+                    self.possibleMoves[3].append((leftShift, self.y))
             else:
-                tlStop = True
-
-            rightShift += 1
-            leftShift -= 1
+                lStop = True
             upShift -= 1
             bottomShift += 1
+            rightShift += 1
+            leftShift -= 1
 
     def showMoves(self, display):
         if self.selected:

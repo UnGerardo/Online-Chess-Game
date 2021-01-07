@@ -2,6 +2,7 @@ import pygame
 import math
 import pawn as p
 import bishop as b
+import rook as r
 import grid
 
 
@@ -65,7 +66,7 @@ if __name__ == '__main__':
             3: None,
             4: p.Pawn("bPawn", 4, 4, "images/pawn.png"),
             5: None,
-            6: None,
+            6: r.Rook("bRook", 4, 6, "images/rook.png"),
             7: None,
             8: None
         },
