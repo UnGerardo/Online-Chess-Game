@@ -3,6 +3,8 @@ import math
 import pawn as p
 import bishop as b
 import rook as r
+import knight as k
+import queen as q
 import grid
 
 
@@ -54,7 +56,7 @@ if __name__ == '__main__':
             1: None,
             2: None,
             3: None,
-            4: None,
+            4: k.Knight('bKnight', 3, 4, "images/knight.png"),
             5: None,
             6: None,
             7: None,
@@ -146,10 +148,7 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                print(pieceLocations)
-                print(currentPiece.x)
-                print(currentPiece.y)
-                print(currentPiece.possibleMoves[0].head)
+                pass
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing

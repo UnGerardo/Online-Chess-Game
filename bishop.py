@@ -8,11 +8,11 @@ class Bishop(chesspiece.ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
         # moves linked list order: top right, bottom right, bottom left, top left
-        self.possibleMoves = []
+        self.moves = []
 
     def getMoves(self, piecesDict):
         # reset
-        self.possibleMoves = [0, 0, 0, 0]
+        self.moves = [0, 0, 0, 0]
 
         rightShift = self.x+1
         leftShift = self.x-1
@@ -23,39 +23,42 @@ class Bishop(chesspiece.ChessPiece):
         brStop = False
         blStop = False
         while (not trStop) or (not brStop) or (not blStop) or (not tlStop):
-            # get top right moves
-            if (not trStop) and (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]):
-                if not self.possibleMoves[0]:
-                    self.possibleMoves[0] = ll.LinkedList((rightShift, upShift))
+            # get top right moves + example of putting conditions on multiple lines
+            if (not trStop) and \
+                    (rightShift <= 8) and \
+                    (upShift >= 1) and \
+                    (not piecesDict[rightShift][upShift]):
+                if not self.moves[0]:
+                    self.moves[0] = ll.LinkedList((rightShift, upShift))
                 else:
-                    self.possibleMoves[0].append((rightShift, upShift))
+                    self.moves[0].append((rightShift, upShift))
             else:
                 trStop = True
 
             # get bottom right moves
             if (not brStop) and (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]):
-                if not self.possibleMoves[1]:
-                    self.possibleMoves[1] = ll.LinkedList((rightShift, bottomShift))
+                if not self.moves[1]:
+                    self.moves[1] = ll.LinkedList((rightShift, bottomShift))
                 else:
-                    self.possibleMoves[1].append((rightShift, bottomShift))
+                    self.moves[1].append((rightShift, bottomShift))
             else:
                 brStop = True
 
             # get bottom left moves
             if (not blStop) and (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]):
-                if not self.possibleMoves[2]:
-                    self.possibleMoves[2] = ll.LinkedList((leftShift, bottomShift))
+                if not self.moves[2]:
+                    self.moves[2] = ll.LinkedList((leftShift, bottomShift))
                 else:
-                    self.possibleMoves[2].append((leftShift, bottomShift))
+                    self.moves[2].append((leftShift, bottomShift))
             else:
                 blStop = True
 
             # get top left moves
             if (not tlStop) and (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]):
-                if not self.possibleMoves[3]:
-                    self.possibleMoves[3] = ll.LinkedList((leftShift, upShift))
+                if not self.moves[3]:
+                    self.moves[3] = ll.LinkedList((leftShift, upShift))
                 else:
-                    self.possibleMoves[3].append((leftShift, upShift))
+                    self.moves[3].append((leftShift, upShift))
             else:
                 tlStop = True
 
@@ -66,7 +69,7 @@ class Bishop(chesspiece.ChessPiece):
 
     def showMoves(self, display):
         if self.selected:
-            for linlist in self.possibleMoves:
+            for linlist in self.moves:
                 if linlist:
                     currentNode = linlist.head
                     while currentNode:
@@ -81,7 +84,7 @@ class Bishop(chesspiece.ChessPiece):
     def validMove(self, mouseP):
         # could possibly make faster if checking whether mousePos is to the right/left and above/below piece, then check
         # linlist that relates (topleft/topright, etc);
-        for linlist in self.possibleMoves:
+        for linlist in self.moves:
             if linlist:
                 currentNode = linlist.head
                 while currentNode:
