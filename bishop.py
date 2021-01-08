@@ -22,9 +22,9 @@ class Bishop(chesspiece.ChessPiece):
         tlStop = False
         brStop = False
         blStop = False
-        while rightShift <= 8 or leftShift >= 1 or upShift >= 1 or bottomShift <= 8:
+        while (not trStop) or (not brStop) or (not blStop) or (not tlStop):
             # get top right moves
-            if (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]) and (not trStop):
+            if (not trStop) and (rightShift <= 8) and (upShift >= 1) and (not piecesDict[rightShift][upShift]):
                 if not self.possibleMoves[0]:
                     self.possibleMoves[0] = ll.LinkedList((rightShift, upShift))
                 else:
@@ -33,7 +33,7 @@ class Bishop(chesspiece.ChessPiece):
                 trStop = True
 
             # get bottom right moves
-            if (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]) and (not brStop):
+            if (not brStop) and (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]):
                 if not self.possibleMoves[1]:
                     self.possibleMoves[1] = ll.LinkedList((rightShift, bottomShift))
                 else:
@@ -42,7 +42,7 @@ class Bishop(chesspiece.ChessPiece):
                 brStop = True
 
             # get bottom left moves
-            if (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]) and (not blStop):
+            if (not blStop) and (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]):
                 if not self.possibleMoves[2]:
                     self.possibleMoves[2] = ll.LinkedList((leftShift, bottomShift))
                 else:
@@ -51,7 +51,7 @@ class Bishop(chesspiece.ChessPiece):
                 blStop = True
 
             # get top left moves
-            if (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]) and (not tlStop):
+            if (not tlStop) and (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]):
                 if not self.possibleMoves[3]:
                     self.possibleMoves[3] = ll.LinkedList((leftShift, upShift))
                 else:

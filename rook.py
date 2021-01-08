@@ -31,6 +31,7 @@ class Rook(chesspiece.ChessPiece):
                     self.possibleMoves[0].append((self.x, upShift))
             else:
                 tStop = True
+
             # get right moves
             if (not rStop) and rightShift <= 8 and (not piecesDict[rightShift][self.y]):
                 if not self.possibleMoves[1]:
@@ -39,6 +40,7 @@ class Rook(chesspiece.ChessPiece):
                     self.possibleMoves[1].append((rightShift, self.y))
             else:
                 rStop = True
+
             # get bottom moves
             if (not bStop) and bottomShift <= 8 and (not piecesDict[self.x][bottomShift]):
                 if not self.possibleMoves[2]:
@@ -47,6 +49,7 @@ class Rook(chesspiece.ChessPiece):
                     self.possibleMoves[2].append((self.x, bottomShift))
             else:
                 bStop = True
+
             # get left moves
             if (not lStop) and leftShift >= 1 and (not piecesDict[leftShift][self.y]):
                 if not self.possibleMoves[3]:
