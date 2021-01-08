@@ -11,7 +11,7 @@ class Pawn(chesspiece.ChessPiece):
         self.moves = []
 
     def getMoves(self, piecesDict):
-        # get possible moves
+        # get possible bMoves
         if self.firstMove:
             if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
                 self.moves = [(self.x, self.y - 1), (self.x, self.y - 2)]
@@ -21,7 +21,7 @@ class Pawn(chesspiece.ChessPiece):
         else:
             self.moves = [(self.x, self.y - 1)]
 
-        # go through possible moves and see if any are taken, set to 0
+        # go through possible bMoves and see if any are taken, set to 0
         try:
             for i in range(len(self.moves)):
                 if piecesDict[self.moves[i][0]][self.moves[i][1]]:

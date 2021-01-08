@@ -148,7 +148,10 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                pass
+                queen = q.Queen('bQueen', 1, 1, "images/queen.png")
+                print(queen.getMoves(pieceLocations))
+                print(queen.bMoves)
+                print(queen.rMoves)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
