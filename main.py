@@ -59,7 +59,7 @@ if __name__ == '__main__':
             4: Knight('bKnight', 3, 4, "images/knight.png"),
             5: None,
             6: None,
-            7: Queen('bQueen', 1, 1, "images/queen.png"),
+            7: Queen('bQueen', 3, 7, "images/queen.png"),
             8: None
         },
         4: {
@@ -148,7 +148,8 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                print(currentPiece)
+                pass
+                # print(pieces)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing

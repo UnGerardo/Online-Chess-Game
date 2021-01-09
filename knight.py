@@ -8,8 +8,8 @@ class Knight(chesspiece.ChessPiece):
         super().__init__(name, x, y, image)
         self.moves = []
 
-    def getMoves(self):
-        # reset
+    def getMoves(self, piecesDict):
+        # reset; piecesDict isn't used yet but will be to differentiate allies from enemies
         self.moves = []
 
         upShift = self.y - 2
