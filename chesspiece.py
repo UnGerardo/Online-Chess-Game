@@ -1,5 +1,5 @@
 import pygame
-import grid
+from grid import SQUARE_SIZE
 
 
 class ChessPiece:
@@ -16,8 +16,8 @@ class ChessPiece:
 
     def show(self, display):
         display.blit(self.image, (
-                                 ((self.x * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                 ((self.y * grid.SQUARE_SIZE) - grid.SQUARE_SIZE)
+                                 ((self.x * SQUARE_SIZE) - SQUARE_SIZE),
+                                 ((self.y * SQUARE_SIZE) - SQUARE_SIZE)
                                  ))
 
     def move(self, mousePos):

@@ -1,11 +1,10 @@
 import pygame
-import chesspiece
-import queen as q
-import linkedlist as ll
-import grid
+from chesspiece import ChessPiece
+from linkedlist import LinkedList
+from grid import SQUARE_SIZE
 
 
-class Rook(chesspiece.ChessPiece):
+class Rook(ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
         # bMoves linked list order: top, right, bottom, left
@@ -27,7 +26,7 @@ class Rook(chesspiece.ChessPiece):
             # get top rMoves
             if (not tStop) and upShift >= 1 and (not piecesDict[self.x][upShift]):
                 if not self.rMoves[0]:
-                    self.rMoves[0] = ll.LinkedList((self.x, upShift))
+                    self.rMoves[0] = LinkedList((self.x, upShift))
                 else:
                     self.rMoves[0].append((self.x, upShift))
             else:
@@ -36,7 +35,7 @@ class Rook(chesspiece.ChessPiece):
             # get right rMoves
             if (not rStop) and rightShift <= 8 and (not piecesDict[rightShift][self.y]):
                 if not self.rMoves[1]:
-                    self.rMoves[1] = ll.LinkedList((rightShift, self.y))
+                    self.rMoves[1] = LinkedList((rightShift, self.y))
                 else:
                     self.rMoves[1].append((rightShift, self.y))
             else:
@@ -45,7 +44,7 @@ class Rook(chesspiece.ChessPiece):
             # get bottom rMoves
             if (not bStop) and bottomShift <= 8 and (not piecesDict[self.x][bottomShift]):
                 if not self.rMoves[2]:
-                    self.rMoves[2] = ll.LinkedList((self.x, bottomShift))
+                    self.rMoves[2] = LinkedList((self.x, bottomShift))
                 else:
                     self.rMoves[2].append((self.x, bottomShift))
             else:
@@ -54,7 +53,7 @@ class Rook(chesspiece.ChessPiece):
             # get left rMoves
             if (not lStop) and leftShift >= 1 and (not piecesDict[leftShift][self.y]):
                 if not self.rMoves[3]:
-                    self.rMoves[3] = ll.LinkedList((leftShift, self.y))
+                    self.rMoves[3] = LinkedList((leftShift, self.y))
                 else:
                     self.rMoves[3].append((leftShift, self.y))
             else:
@@ -73,9 +72,9 @@ class Rook(chesspiece.ChessPiece):
                         if currentNode['value']:
                             pygame.draw.rect(display,
                                              '#009900',
-                                             pygame.Rect(((currentNode['value'][0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                         ((currentNode['value'][1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                         grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+                                             pygame.Rect(((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                         ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                         SQUARE_SIZE, SQUARE_SIZE))
                         currentNode = currentNode['next']
 
     def validMove(self, mouseP):

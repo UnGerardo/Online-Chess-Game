@@ -1,15 +1,15 @@
 import pygame
 import math
-import pawn as p
-import bishop as b
-import rook as r
-import knight as k
-import queen as q
-import grid
+from pawn import Pawn
+from bishop import Bishop
+from rook import Rook
+from knight import Knight
+from queen import Queen
+from grid import Grid, SQUARE_SIZE
 
 
 def getMousePosition(value):
-    return math.ceil((pygame.mouse.get_pos())[value]/grid.SQUARE_SIZE)
+    return math.ceil((pygame.mouse.get_pos())[value]/SQUARE_SIZE)
 
 
 def changePiece(newPiece, piecesDict):
@@ -25,7 +25,7 @@ def updatePiecesLocation(pieceDict, currPiece, mouseP):
 
 
 if __name__ == '__main__':
-    chessGrid = grid.Grid()
+    chessGrid = Grid()
     chessGrid.setScreen()
     chessGrid.drawGrid()
 
@@ -38,8 +38,8 @@ if __name__ == '__main__':
             3: None,
             4: None,
             5: None,
-            6: p.Pawn("bPawn", 1, 6, "images/pawn.png"),
-            7: p.Pawn("bPawn", 1, 7, "images/pawn.png"),
+            6: Pawn("bPawn", 1, 6, "images/pawn.png"),
+            7: Pawn("bPawn", 1, 7, "images/pawn.png"),
             8: None
         },
         2: {
@@ -56,19 +56,19 @@ if __name__ == '__main__':
             1: None,
             2: None,
             3: None,
-            4: k.Knight('bKnight', 3, 4, "images/knight.png"),
+            4: Knight('bKnight', 3, 4, "images/knight.png"),
             5: None,
             6: None,
-            7: None,
+            7: Queen('bQueen', 1, 1, "images/queen.png"),
             8: None
         },
         4: {
             1: None,
             2: None,
             3: None,
-            4: p.Pawn("bPawn", 4, 4, "images/pawn.png"),
+            4: Pawn("bPawn", 4, 4, "images/pawn.png"),
             5: None,
-            6: r.Rook("bRook", 4, 6, "images/rook.png"),
+            6: Rook("bRook", 4, 6, "images/rook.png"),
             7: None,
             8: None
         },
@@ -77,7 +77,7 @@ if __name__ == '__main__':
             2: None,
             3: None,
             4: None,
-            5: b.Bishop('bBishop', 5, 5, "images/bishop.png"),
+            5: Bishop('bBishop', 5, 5, "images/bishop.png"),
             6: None,
             7: None,
             8: None
@@ -148,10 +148,7 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                queen = q.Queen('bQueen', 1, 1, "images/queen.png")
-                print(queen.getMoves(pieceLocations))
-                print(queen.bMoves)
-                print(queen.rMoves)
+                print(currentPiece)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing

@@ -1,10 +1,10 @@
 import pygame
-import chesspiece
-import linkedlist as ll
-import grid
+from chesspiece import ChessPiece
+from linkedlist import LinkedList
+from grid import SQUARE_SIZE
 
 
-class Bishop(chesspiece.ChessPiece):
+class Bishop(ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
         # bMoves linked list order: top right, bottom right, bottom left, top left
@@ -29,7 +29,7 @@ class Bishop(chesspiece.ChessPiece):
                     (upShift >= 1) and \
                     (not piecesDict[rightShift][upShift]):
                 if not self.bMoves[0]:
-                    self.bMoves[0] = ll.LinkedList((rightShift, upShift))
+                    self.bMoves[0] = LinkedList((rightShift, upShift))
                 else:
                     self.bMoves[0].append((rightShift, upShift))
             else:
@@ -38,7 +38,7 @@ class Bishop(chesspiece.ChessPiece):
             # get bottom right bMoves
             if (not brStop) and (rightShift <= 8) and (bottomShift <= 8) and (not piecesDict[rightShift][bottomShift]):
                 if not self.bMoves[1]:
-                    self.bMoves[1] = ll.LinkedList((rightShift, bottomShift))
+                    self.bMoves[1] = LinkedList((rightShift, bottomShift))
                 else:
                     self.bMoves[1].append((rightShift, bottomShift))
             else:
@@ -47,7 +47,7 @@ class Bishop(chesspiece.ChessPiece):
             # get bottom left bMoves
             if (not blStop) and (leftShift >= 1) and (bottomShift <= 8) and (not piecesDict[leftShift][bottomShift]):
                 if not self.bMoves[2]:
-                    self.bMoves[2] = ll.LinkedList((leftShift, bottomShift))
+                    self.bMoves[2] = LinkedList((leftShift, bottomShift))
                 else:
                     self.bMoves[2].append((leftShift, bottomShift))
             else:
@@ -56,7 +56,7 @@ class Bishop(chesspiece.ChessPiece):
             # get top left bMoves
             if (not tlStop) and (leftShift >= 1) and (upShift >= 1) and (not piecesDict[leftShift][upShift]):
                 if not self.bMoves[3]:
-                    self.bMoves[3] = ll.LinkedList((leftShift, upShift))
+                    self.bMoves[3] = LinkedList((leftShift, upShift))
                 else:
                     self.bMoves[3].append((leftShift, upShift))
             else:
@@ -76,9 +76,9 @@ class Bishop(chesspiece.ChessPiece):
                         if currentNode['value']:
                             pygame.draw.rect(display,
                                              '#009900',
-                                             pygame.Rect(((currentNode['value'][0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                         ((currentNode['value'][1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                         grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+                                             pygame.Rect(((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                         ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                         SQUARE_SIZE, SQUARE_SIZE))
                         currentNode = currentNode['next']
 
     def validMove(self, mouseP):
