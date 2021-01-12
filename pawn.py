@@ -1,9 +1,9 @@
 import pygame
-import chesspiece
-import grid
+from chesspiece import ChessPiece
+from grid import SQUARE_SIZE
 
 
-class Pawn(chesspiece.ChessPiece):
+class Pawn(ChessPiece):
     def __init__(self, name, x, y, image,):
         super().__init__(name, x, y, image)
         self.firstPos = (x, y)
@@ -11,7 +11,7 @@ class Pawn(chesspiece.ChessPiece):
         self.moves = []
 
     def getMoves(self, piecesDict):
-        # get possible bMoves
+        # get possible moves
         if self.firstMove:
             if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
                 self.moves = [(self.x, self.y - 1), (self.x, self.y - 2)]
@@ -21,7 +21,7 @@ class Pawn(chesspiece.ChessPiece):
         else:
             self.moves = [(self.x, self.y - 1)]
 
-        # go through possible bMoves and see if any are taken, set to 0
+        # go through possible moves and see if any are taken, set to 0
         try:
             for i in range(len(self.moves)):
                 if piecesDict[self.moves[i][0]][self.moves[i][1]]:
@@ -39,9 +39,9 @@ class Pawn(chesspiece.ChessPiece):
                 if move:
                     pygame.draw.rect(display,
                                      '#009900',
-                                     pygame.Rect(((move[0] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                 ((move[1] * grid.SQUARE_SIZE) - grid.SQUARE_SIZE),
-                                                 grid.SQUARE_SIZE, grid.SQUARE_SIZE))
+                                     pygame.Rect(((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                 ((move[1] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                 SQUARE_SIZE, SQUARE_SIZE))
 
     def validMove(self, mouseP):
         for move in self.moves:

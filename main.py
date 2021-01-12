@@ -5,6 +5,7 @@ from bishop import Bishop
 from rook import Rook
 from knight import Knight
 from queen import Queen
+from king import King
 from grid import Grid, SQUARE_SIZE
 
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
             1: None,
             2: None,
             3: None,
-            4: None,
+            4: King("bKing", 2, 4, "images/king.png"),
             5: None,
             6: None,
             7: None,
