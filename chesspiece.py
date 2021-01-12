@@ -3,11 +3,12 @@ from grid import SQUARE_SIZE
 
 
 class ChessPiece:
-    def __init__(self, name, x, y, image):
-        self.name = name
+    def __init__(self, x, y, image, color):
         self.x = x
         self.y = y
         self.image = pygame.image.load(image)
+        # 0 is for black and 1 is for white
+        self.color = color
         self.selected = False
         self.captured = False
 

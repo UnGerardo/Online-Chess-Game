@@ -5,8 +5,8 @@ from grid import SQUARE_SIZE
 
 
 class Bishop(ChessPiece):
-    def __init__(self, name, x, y, image,):
-        super().__init__(name, x, y, image)
+    def __init__(self, x, y, image, color):
+        super().__init__(x, y, image, color)
         # bMoves linked list order: top right, bottom right, bottom left, top left
         self.bMoves = []
 
