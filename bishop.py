@@ -1,6 +1,5 @@
-from chesspiece import ChessPiece
+from chesspiece import ChessPiece, showLLMoves, validLLMove
 from linkedlist import LinkedList
-from grid import SQUARE_SIZE, HL_SQUARE
 
 
 class Bishop(ChessPiece):
@@ -71,17 +70,7 @@ class Bishop(ChessPiece):
             bottomShift += 1
 
     def showMoves(self, display):
-        currentNode = self.bMoves.head['next']
-        while currentNode:
-            if currentNode['value']:
-                display.blit(HL_SQUARE, (((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                         ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE)))
-            currentNode = currentNode['next']
+        showLLMoves(self.bMoves, display)
 
-    def validMove(self, mouseP):
-        currentNode = self.bMoves.head['next']
-        while currentNode:
-            if mouseP[0] == currentNode['value'][0] and mouseP[1] == currentNode['value'][1]:
-                return True
-            currentNode = currentNode['next']
-        return False
+    def validMove(self, mousePos):
+        validLLMove(self.bMoves, mousePos)

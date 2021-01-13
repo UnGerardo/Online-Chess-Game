@@ -1,5 +1,23 @@
 import pygame
-from grid import SQUARE_SIZE
+from grid import SQUARE_SIZE, HL_SQUARE
+
+
+def showLLMoves(moves, display):
+    currentNode = moves.head['next']
+    while currentNode:
+        if currentNode['value']:
+            display.blit(HL_SQUARE, (((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                     ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE)))
+        currentNode = currentNode['next']
+
+
+def validLLMove(moves, mousePos):
+    currentNode = moves.head['next']
+    while currentNode:
+        if mousePos[0] == currentNode['value'][0] and mousePos[1] == currentNode['value'][1]:
+            return True
+        currentNode = currentNode['next']
+    return False
 
 
 class ChessPiece:
