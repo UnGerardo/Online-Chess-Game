@@ -24,9 +24,9 @@ class Grid:
             left = 0
             for j in range(8):
                 if counter % 2:
-                    pygame.draw.rect(self.screen, '#000000', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
+                    pygame.draw.rect(self.screen, '#222222', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
                 else:
-                    pygame.draw.rect(self.screen, '#ffffff', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
+                    pygame.draw.rect(self.screen, '#cccccc', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
                 left += SQUARE_SIZE
                 counter += 1
             counter += 1

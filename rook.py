@@ -31,9 +31,7 @@ class Rook(ChessPiece):
                             self.rMoves[0] = LinkedList((self.x, upShift))
                         else:
                             self.rMoves[0].append((self.x, upShift))
-                        tStop = True
-                    else:  # else piece color is the same, stop
-                        tStop = True
+                    tStop = True  # whether piece is same color or not, stop
                 else:  # else piece not in the way, add and keep going
                     if not self.rMoves[0]:
                         self.rMoves[0] = LinkedList((self.x, upShift))

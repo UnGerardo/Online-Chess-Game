@@ -34,84 +34,84 @@ if __name__ == '__main__':
         # columns - x - top left (1,1)
         1: {
             # rows - y
-            1: Rook(1, 1, "images/queen.png", 0),
+            1: Rook(1, 1, "images/blackRook.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Rook(1, 8, "images/queen.png", 1)
+            8: Rook(1, 8, "images/whiteRook.png", 1)
         },
         2: {
-            1: Knight(2, 1, "images/knight.png", 0),
+            1: Knight(2, 1, "images/blackKnight.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Knight(2, 8, "images/queen.png", 1)
+            8: Knight(2, 8, "images/whiteKnight.png", 1)
         },
         3: {
-            1: Bishop(3, 1, "images/bishop.png", 0),
+            1: Bishop(3, 1, "images/blackBishop.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Bishop(3, 8, "images/bishop.png", 1)
+            8: Bishop(3, 8, "images/whiteBishop.png", 1)
         },
         4: {
-            1: Queen(4, 1, "images/queen.png", 0),
+            1: Queen(4, 1, "images/blackQueen.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Queen(4, 8, "images/queen.png", 1)
+            8: Queen(4, 8, "images/whiteQueen.png", 1)
         },
         5: {
-            1: King(5, 1, "images/king.png", 0),
+            1: King(5, 1, "images/blackKing.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: King(5, 8, "images/king.png", 1)
+            8: King(5, 8, "images/whiteKing.png", 1)
         },
         6: {
-            1: Bishop(6, 1, "images/bishop.png", 0),
+            1: Bishop(6, 1, "images/blackBishop.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Bishop(6, 8, "images/bishop.png", 1)
+            8: Bishop(6, 8, "images/whiteBishop.png", 1)
         },
         7: {
-            1: Knight(7, 1, "images/knight.png", 0),
+            1: Knight(7, 1, "images/blackKnight.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Knight(7, 8, "images/knight.png", 1)
+            8: Knight(7, 8, "images/whiteKnight.png", 1)
         },
         8: {
-            1: Rook(8, 1, "images/rook.png", 0),
+            1: Rook(8, 1, "images/blackRook.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: Rook(8, 8, "images/rook.png", 1)
+            8: Rook(8, 8, "images/whiteRook.png", 1)
         }
     }
     mousePos = (0, 0)
@@ -151,9 +151,9 @@ if __name__ == '__main__':
 
             if event.type == pygame.KEYDOWN:
                 pass
-                for i in range(8):
-                    print(str(i+1) + ' ' + str(pieceLocations[i+1]))
-                print('break')
+                # for i in range(8):
+                #     print(str(i+1) + ' ' + str(pieceLocations[i+1]))
+                # print('break')
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
