@@ -16,7 +16,8 @@ class Rook(ChessPiece):
             self.rMoves[index].append(position)
 
     def getMoves(self, piecesDict):
-        # reset
+        # reset - think about making moves one linked list, also for bishop=============================================
+        # one linked list would mean the moves would be in top, right, bottom, left, top, right, bottom...
         self.rMoves = [0, 0, 0, 0]
 
         rightShift = self.x + 1
@@ -28,42 +29,47 @@ class Rook(ChessPiece):
         bStop = False
         lStop = False
         while (not tStop) or (not rStop) or (not bStop) or (not lStop):
-            # get top rMoves - while top is not reached or tStop isn't true
+            # get top moves - while top is not reached or tStop isn't true
             if (not tStop) and upShift >= 1:
-                if piecesDict[self.x][upShift]:  # if piece exists, check color
-                    # if piece color is different, add to moves and stop
-                    if not piecesDict[self.x][upShift].color == self.color:
-                        self.addToMoves(0, (self.x, upShift))
-                    tStop = True  # whether piece is same color or not, stop
-                else:  # else piece not in the way, add and keep going
+                tStop = True  # assume piece blocks path - removes need for additional check (if)
+                if not piecesDict[self.x][upShift]:  # if no piece blocks path - add to moves and remove block
+                    self.addToMoves(0, (self.x, upShift))
+                    tStop = False
+                elif not piecesDict[self.x][upShift].color == self.color:  # if there is a piece check color
                     self.addToMoves(0, (self.x, upShift))
             else:  # path blocked by piece or top reached
                 tStop = True
 
-            # get right rMoves
-            if (not rStop) and rightShift <= 8 and (not piecesDict[rightShift][self.y]):
-                if not self.rMoves[1]:
-                    self.rMoves[1] = LinkedList((rightShift, self.y))
-                else:
-                    self.rMoves[1].append((rightShift, self.y))
+            # get right moves
+            if (not rStop) and rightShift <= 8:
+                rStop = True
+                if not piecesDict[rightShift][self.y]:
+                    self.addToMoves(1, (rightShift, self.y))
+                    rStop = False
+                elif not piecesDict[rightShift][self.y].color == self.color:
+                    self.addToMoves(1, (rightShift, self.y))
             else:
                 rStop = True
 
-            # get bottom rMoves
-            if (not bStop) and bottomShift <= 8 and (not piecesDict[self.x][bottomShift]):
-                if not self.rMoves[2]:
-                    self.rMoves[2] = LinkedList((self.x, bottomShift))
-                else:
-                    self.rMoves[2].append((self.x, bottomShift))
+            # get bottom moves
+            if (not bStop) and bottomShift <= 8:
+                bStop = True
+                if not piecesDict[self.x][bottomShift]:
+                    self.addToMoves(2, (self.x, bottomShift))
+                    bStop = False
+                elif not piecesDict[self.x][bottomShift].color == self.color:
+                    self.addToMoves(2, (self.x, bottomShift))
             else:
                 bStop = True
 
-            # get left rMoves
-            if (not lStop) and leftShift >= 1 and (not piecesDict[leftShift][self.y]):
-                if not self.rMoves[3]:
-                    self.rMoves[3] = LinkedList((leftShift, self.y))
-                else:
-                    self.rMoves[3].append((leftShift, self.y))
+            # get left moves
+            if (not lStop) and leftShift >= 1:
+                lStop = True
+                if not piecesDict[leftShift][self.y]:
+                    self.addToMoves(3, (leftShift, self.y))
+                    lStop = False
+                elif not piecesDict[leftShift][self.y].color == self.color:
+                    self.addToMoves(3, (leftShift, self.y))
             else:
                 lStop = True
             upShift -= 1
