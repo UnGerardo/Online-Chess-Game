@@ -35,82 +35,82 @@ if __name__ == '__main__':
         1: {
             # rows - y
             1: Rook(1, 1, "images/blackRook.png", 0),
-            2: None,
+            2: Pawn(1, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(1, 7, "images/whitePawn.png", 1),
             8: Rook(1, 8, "images/whiteRook.png", 1)
         },
         2: {
             1: Knight(2, 1, "images/blackKnight.png", 0),
-            2: None,
+            2: Pawn(2, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(2, 7, "images/whitePawn.png", 1),
             8: Knight(2, 8, "images/whiteKnight.png", 1)
         },
         3: {
             1: Bishop(3, 1, "images/blackBishop.png", 0),
-            2: None,
+            2: Pawn(3, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(3, 7, "images/whitePawn.png", 1),
             8: Bishop(3, 8, "images/whiteBishop.png", 1)
         },
         4: {
             1: Queen(4, 1, "images/blackQueen.png", 0),
-            2: None,
+            2: Pawn(4, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(4, 7, "images/whitePawn.png", 1),
             8: Queen(4, 8, "images/whiteQueen.png", 1)
         },
         5: {
             1: King(5, 1, "images/blackKing.png", 0),
-            2: None,
+            2: Pawn(5, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(5, 7, "images/whitePawn.png", 1),
             8: King(5, 8, "images/whiteKing.png", 1)
         },
         6: {
             1: Bishop(6, 1, "images/blackBishop.png", 0),
-            2: None,
+            2: Pawn(6, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(6, 7, "images/whitePawn.png", 1),
             8: Bishop(6, 8, "images/whiteBishop.png", 1)
         },
         7: {
             1: Knight(7, 1, "images/blackKnight.png", 0),
-            2: None,
+            2: Pawn(7, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(7, 7, "images/whitePawn.png", 1),
             8: Knight(7, 8, "images/whiteKnight.png", 1)
         },
         8: {
             1: Rook(8, 1, "images/blackRook.png", 0),
-            2: None,
+            2: Pawn(8, 2, "images/blackPawn.png", 0),
             3: None,
             4: None,
             5: None,
             6: None,
-            7: None,
+            7: Pawn(8, 7, "images/whitePawn.png", 1),
             8: Rook(8, 8, "images/whiteRook.png", 1)
         }
     }
@@ -164,4 +164,5 @@ if __name__ == '__main__':
                 piece = pieceLocations[col+1][row+1]
                 if piece:
                     piece.show(chessGrid.screen)
-                    piece.showMoves(chessGrid.screen)
+                    if piece.selected:
+                        piece.showMoves(chessGrid.screen)
