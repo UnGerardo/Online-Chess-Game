@@ -9,6 +9,12 @@ class Rook(ChessPiece):
         # bMoves linked list order: top, right, bottom, left
         self.rMoves = []
 
+    def addToMoves(self, index, position):
+        if not self.rMoves[index]:
+            self.rMoves[index] = LinkedList(position)
+        else:
+            self.rMoves[index].append(position)
+
     def getMoves(self, piecesDict):
         # reset
         self.rMoves = [0, 0, 0, 0]
@@ -27,16 +33,10 @@ class Rook(ChessPiece):
                 if piecesDict[self.x][upShift]:  # if piece exists, check color
                     # if piece color is different, add to moves and stop
                     if not piecesDict[self.x][upShift].color == self.color:
-                        if not self.rMoves[0]:
-                            self.rMoves[0] = LinkedList((self.x, upShift))
-                        else:
-                            self.rMoves[0].append((self.x, upShift))
+                        self.addToMoves(0, (self.x, upShift))
                     tStop = True  # whether piece is same color or not, stop
                 else:  # else piece not in the way, add and keep going
-                    if not self.rMoves[0]:
-                        self.rMoves[0] = LinkedList((self.x, upShift))
-                    else:
-                        self.rMoves[0].append((self.x, upShift))
+                    self.addToMoves(0, (self.x, upShift))
             else:  # path blocked by piece or top reached
                 tStop = True
 
