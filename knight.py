@@ -7,7 +7,7 @@ class Knight(ChessPiece):
         self.moves = []
 
     def getMoves(self, piecesDict):
-        # reset; piecesDict isn't used yet but will be to differentiate allies from enemies
+        # reset
         self.moves = []
 
         upShift = self.y - 2
@@ -16,20 +16,44 @@ class Knight(ChessPiece):
         leftShift = self.x - 2
         # get top two
         if upShift >= 1:
-            self.moves.append((self.x + 1, upShift))
-            self.moves.append((self.x - 1, upShift))
+            if (self.x + 1 <= 8) and \
+               (not piecesDict[self.x + 1][upShift] or
+               (not piecesDict[self.x + 1][upShift].color == self.color)):
+                self.moves.append((self.x + 1, upShift))
+            if (self.x - 1 >= 1) and \
+               (not piecesDict[self.x - 1][upShift] or
+               (not piecesDict[self.x - 1][upShift].color == self.color)):
+                self.moves.append((self.x - 1, upShift))
         # get right two
         if rightShift <= 8:
-            self.moves.append((rightShift, self.y + 1))
-            self.moves.append((rightShift, self.y - 1))
+            if (self.y + 1 <= 8) and \
+               (not piecesDict[rightShift][self.y + 1] or
+               (not piecesDict[rightShift][self.y + 1].color == self.color)):
+                self.moves.append((rightShift, self.y + 1))
+            if (self.y - 1 >= 1) and \
+               (not piecesDict[rightShift][self.y - 1] or
+               (not piecesDict[rightShift][self.y - 1].color == self.color)):
+                self.moves.append((rightShift, self.y - 1))
         # get bottom two
         if bottomShift <= 8:
-            self.moves.append((self.x + 1, bottomShift))
-            self.moves.append((self.x - 1, bottomShift))
+            if (self.x + 1 <= 8) and \
+               (not piecesDict[self.x + 1][bottomShift] or
+               (not piecesDict[self.x + 1][bottomShift].color == self.color)):
+                self.moves.append((self.x + 1, bottomShift))
+            if (self.x - 1 >= 1) and \
+               (not piecesDict[self.x - 1][bottomShift] or
+               (not piecesDict[self.x - 1][bottomShift].color == self.color)):
+                self.moves.append((self.x - 1, bottomShift))
         # get left two
         if leftShift >= 1:
-            self.moves.append((leftShift, self.y + 1))
-            self.moves.append((leftShift, self.y - 1))
+            if (self.y + 1 <= 8) and \
+               (not piecesDict[leftShift][self.y + 1] or
+               (not piecesDict[leftShift][self.y + 1].color == self.color)):
+                self.moves.append((leftShift, self.y + 1))
+            if (self.y - 1 >= 1) and \
+               (not piecesDict[leftShift][self.y - 1] or
+               (not piecesDict[leftShift][self.y - 1].color == self.color)):
+                self.moves.append((leftShift, self.y - 1))
 
     def showMoves(self, display):
         showAMoves(self.moves, display)
