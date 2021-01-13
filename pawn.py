@@ -10,7 +10,7 @@ class Pawn(ChessPiece):
         self.moves = []
 
     def getMoves(self, piecesDict):
-        # get possible moves
+        # get possible moves maybe use a linked list for first move
         if self.firstMove:
             if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
                 self.moves = [(self.x, self.y - 1), (self.x, self.y - 2)]

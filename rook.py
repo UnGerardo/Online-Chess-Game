@@ -22,13 +22,24 @@ class Rook(ChessPiece):
         bStop = False
         lStop = False
         while (not tStop) or (not rStop) or (not bStop) or (not lStop):
-            # get top rMoves
-            if (not tStop) and upShift >= 1 and (not piecesDict[self.x][upShift]):
-                if not self.rMoves[0]:
-                    self.rMoves[0] = LinkedList((self.x, upShift))
-                else:
-                    self.rMoves[0].append((self.x, upShift))
-            else:
+            # get top rMoves - while top is not reached or tStop isn't true
+            if (not tStop) and upShift >= 1:
+                if piecesDict[self.x][upShift]:  # if piece exists, check color
+                    # if piece color is different, add to moves and stop
+                    if not piecesDict[self.x][upShift].color == self.color:
+                        if not self.rMoves[0]:
+                            self.rMoves[0] = LinkedList((self.x, upShift))
+                        else:
+                            self.rMoves[0].append((self.x, upShift))
+                        tStop = True
+                    else:  # else piece color is the same, stop
+                        tStop = True
+                else:  # else piece not in the way, add and keep going
+                    if not self.rMoves[0]:
+                        self.rMoves[0] = LinkedList((self.x, upShift))
+                    else:
+                        self.rMoves[0].append((self.x, upShift))
+            else:  # path blocked by piece or top reached
                 tStop = True
 
             # get right rMoves

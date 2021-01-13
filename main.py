@@ -34,89 +34,89 @@ if __name__ == '__main__':
         # columns - x - top left (1,1)
         1: {
             # rows - y
-            1: None,
+            1: Rook(1, 1, "images/queen.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
-            6: Pawn(1, 6, "images/pawn.png", 0),
-            7: Pawn(1, 7, "images/pawn.png", 0),
-            8: None
+            6: None,
+            7: None,
+            8: Rook(1, 8, "images/queen.png", 1)
         },
         2: {
-            1: None,
+            1: Knight(2, 1, "images/knight.png", 0),
             2: None,
             3: None,
-            4: King(2, 4, "images/king.png", 0),
+            4: None,
             5: None,
             6: None,
             7: None,
-            8: None
+            8: Knight(2, 8, "images/queen.png", 1)
         },
         3: {
-            1: None,
+            1: Bishop(3, 1, "images/bishop.png", 0),
             2: None,
             3: None,
-            4: Knight(3, 4, "images/knight.png", 0),
+            4: None,
             5: None,
             6: None,
-            7: Queen(3, 7, "images/queen.png", 0),
-            8: None
+            7: None,
+            8: Bishop(3, 8, "images/bishop.png", 1)
         },
         4: {
-            1: None,
+            1: Queen(4, 1, "images/queen.png", 0),
             2: None,
             3: None,
-            4: Pawn(4, 4, "images/pawn.png", 0),
+            4: None,
             5: None,
-            6: Rook(4, 6, "images/rook.png", 0),
+            6: None,
             7: None,
-            8: None
+            8: Queen(4, 8, "images/queen.png", 1)
         },
         5: {
-            1: None,
+            1: King(5, 1, "images/king.png", 0),
             2: None,
             3: None,
             4: None,
-            5: Bishop(5, 5, "images/bishop.png", 0),
+            5: None,
             6: None,
             7: None,
-            8: None
+            8: King(5, 8, "images/king.png", 1)
         },
         6: {
-            1: None,
+            1: Bishop(6, 1, "images/bishop.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: None
+            8: Bishop(6, 8, "images/bishop.png", 1)
         },
         7: {
-            1: None,
+            1: Knight(7, 1, "images/knight.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: None
+            8: Knight(7, 8, "images/knight.png", 1)
         },
         8: {
-            1: None,
+            1: Rook(8, 1, "images/rook.png", 0),
             2: None,
             3: None,
             4: None,
             5: None,
             6: None,
             7: None,
-            8: None
+            8: Rook(8, 8, "images/rook.png", 1)
         }
     }
     mousePos = (0, 0)
     pieceSelected = False
-    currentPiece = None # :: see if could ever be undefined and used
+    currentPiece = None  # :: see if could ever be undefined and used
     playing = True
     # Game loop
     while playing:
@@ -132,15 +132,16 @@ if __name__ == '__main__':
                 # if a piece has been selected; change selection or move
                 if pieceSelected:
 
-                    # if the user selects a piece after another, change selection
-                    if space:
+                    # if desired move is valid and move if it is, needs to check this first to capture pieces
+                    if currentPiece.validMove(mousePos):
+                        pieceSelected = False
+                        pieceLocations[mousePos[0]][mousePos[1]] = None
+                        updatePiecesLocation(pieceLocations, currentPiece, mousePos)
+
+                    # else if the user selects a piece after another, change selection
+                    elif space:
                         currentPiece.selected = False
                         currentPiece = changePiece(space, pieceLocations)
-
-                    # else check if desired move is valid and move if it is
-                    elif currentPiece.validMove(mousePos):
-                        pieceSelected = False
-                        updatePiecesLocation(pieceLocations, currentPiece, mousePos)
 
                 # if a piece has not been selected (starting point)
                 else:
@@ -150,7 +151,9 @@ if __name__ == '__main__':
 
             if event.type == pygame.KEYDOWN:
                 pass
-                # print(pieces)
+                for i in range(8):
+                    print(str(i+1) + ' ' + str(pieceLocations[i+1]))
+                print('break')
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing

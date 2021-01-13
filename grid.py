@@ -5,7 +5,7 @@ WINDOW_WIDTH = 600
 SQUARE_SIZE = 75
 
 HL_SQUARE = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))
-HL_SQUARE.set_alpha(64)
+HL_SQUARE.set_alpha(50)
 HL_SQUARE.fill((0, 255, 0))
 
 

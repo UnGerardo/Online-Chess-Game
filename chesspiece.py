@@ -10,10 +10,6 @@ class ChessPiece:
         # 0 is for black and 1 is for white
         self.color = color
         self.selected = False
-        self.captured = False
-
-    def killed(self):
-        self.captured = True
 
     def show(self, display):
         display.blit(self.image, (
