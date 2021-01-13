@@ -1,5 +1,4 @@
-from chesspiece import ChessPiece, validAMove
-from grid import SQUARE_SIZE, HL_SQUARE
+from chesspiece import ChessPiece, showAMoves, validAMove
 
 
 class Pawn(ChessPiece):
@@ -33,11 +32,7 @@ class Pawn(ChessPiece):
             self.moves[1] = 0
 
     def showMoves(self, display):
-        if self.selected and self.moves[0]:
-            for move in self.moves:
-                if move:
-                    display.blit(HL_SQUARE, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                             ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
+        showAMoves(self.moves, display)
 
     def validMove(self, mousePos):
         return validAMove(self.moves, mousePos)

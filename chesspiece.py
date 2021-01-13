@@ -2,6 +2,7 @@ import pygame
 from grid import SQUARE_SIZE, HL_SQUARE
 
 
+# for pieces that store moves as a linked list
 def showLLMoves(moves, display):
     currentNode = moves.head['next']
     while currentNode:
@@ -11,6 +12,7 @@ def showLLMoves(moves, display):
         currentNode = currentNode['next']
 
 
+# for pieces that store moves as a linked list
 def validLLMove(moves, mousePos):
     currentNode = moves.head['next']
     while currentNode:
@@ -20,6 +22,15 @@ def validLLMove(moves, mousePos):
     return False
 
 
+# for pieces that store moves as an array
+def showAMoves(moves, display):
+    for move in moves:
+        if move:
+            display.blit(HL_SQUARE, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                     ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
+
+
+# for pieces that store moves as an array
 def validAMove(moves, mousePos):
     for move in moves:
         if move and mousePos[0] == move[0] and mousePos[1] == move[1]:
