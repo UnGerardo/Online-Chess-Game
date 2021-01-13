@@ -20,6 +20,13 @@ def validLLMove(moves, mousePos):
     return False
 
 
+def validAMove(moves, mousePos):
+    for move in moves:
+        if move and mousePos[0] == move[0] and mousePos[1] == move[1]:
+            return True
+    return False
+
+
 class ChessPiece:
     def __init__(self, x, y, image, color):
         self.x = x

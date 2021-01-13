@@ -73,4 +73,4 @@ class Bishop(ChessPiece):
         showLLMoves(self.bMoves, display)
 
     def validMove(self, mousePos):
-        validLLMove(self.bMoves, mousePos)
+        return validLLMove(self.bMoves, mousePos)

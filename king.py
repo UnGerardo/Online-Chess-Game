@@ -1,4 +1,4 @@
-from chesspiece import ChessPiece
+from chesspiece import ChessPiece, validAMove
 from grid import SQUARE_SIZE, HL_SQUARE
 
 
@@ -23,8 +23,5 @@ class King(ChessPiece):
                     display.blit(HL_SQUARE, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
                                              ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
 
-    def validMove(self, mouseP):
-        for move in self.moves:
-            if move and mouseP[0] == move[0] and mouseP[1] == move[1]:
-                return True
-        return False
+    def validMove(self, mousePos):
+        validAMove(self.moves, mousePos)

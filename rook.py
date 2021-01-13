@@ -72,4 +72,4 @@ class Rook(ChessPiece):
         showLLMoves(self.rMoves, display)
 
     def validMove(self, mousePos):
-        validLLMove(self.rMoves, mousePos)
+        return validLLMove(self.rMoves, mousePos)
