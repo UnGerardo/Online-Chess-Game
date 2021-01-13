@@ -70,11 +70,11 @@ class Rook(ChessPiece):
                     currentNode = linlist.head
                     while currentNode:
                         if currentNode['value']:
-                            pygame.draw.rect(display,
-                                             '#009900',
-                                             pygame.Rect(((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                                         ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE),
-                                                         SQUARE_SIZE, SQUARE_SIZE))
+                            square = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))
+                            square.set_alpha(64)
+                            square.fill((0, 255, 0))
+                            display.blit(square, (((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                  ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE)))
                         currentNode = currentNode['next']
 
     def validMove(self, mouseP):

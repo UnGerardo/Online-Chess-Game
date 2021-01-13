@@ -37,11 +37,11 @@ class Pawn(ChessPiece):
         if self.selected and self.moves[0]:
             for move in self.moves:
                 if move:
-                    pygame.draw.rect(display,
-                                     '#009900',
-                                     pygame.Rect(((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                                 ((move[1] * SQUARE_SIZE) - SQUARE_SIZE),
-                                                 SQUARE_SIZE, SQUARE_SIZE))
+                    square = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))
+                    square.set_alpha(64)
+                    square.fill((0, 255, 0))
+                    display.blit(square, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                          ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
 
     def validMove(self, mouseP):
         for move in self.moves:

@@ -7,7 +7,7 @@ SQUARE_SIZE = 75
 
 class Grid:
     def __init__(self):
-        self.screen = pygame.display.set_mode(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.DOUBLEBUF, 32)
 
     def setScreen(self):
         pygame.display.set_caption("Chess")  # set window title
