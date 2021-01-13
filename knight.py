@@ -1,6 +1,5 @@
-import pygame
 from chesspiece import ChessPiece
-from grid import SQUARE_SIZE
+from grid import SQUARE_SIZE, HL_SQUARE
 
 
 class Knight(ChessPiece):
@@ -37,11 +36,8 @@ class Knight(ChessPiece):
         if self.selected:
             for move in self.moves:
                 if move:
-                    square = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))
-                    square.set_alpha(64)
-                    square.fill((0, 255, 0))
-                    display.blit(square, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                          ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
+                    display.blit(HL_SQUARE, (((move[0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                             ((move[1] * SQUARE_SIZE) - SQUARE_SIZE)))
 
     def validMove(self, mouseP):
         for move in self.moves:

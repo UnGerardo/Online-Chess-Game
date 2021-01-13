@@ -1,7 +1,6 @@
-import pygame
 from chesspiece import ChessPiece
 from linkedlist import LinkedList
-from grid import SQUARE_SIZE
+from grid import SQUARE_SIZE, HL_SQUARE
 
 
 class Bishop(ChessPiece):
@@ -14,10 +13,10 @@ class Bishop(ChessPiece):
         # reset
         self.bMoves = [0, 0, 0, 0]
 
-        rightShift = self.x+1
-        leftShift = self.x-1
-        upShift = self.y-1
-        bottomShift = self.y+1
+        rightShift = self.x + 1
+        leftShift = self.x - 1
+        upShift = self.y - 1
+        bottomShift = self.y + 1
         trStop = False
         tlStop = False
         brStop = False
@@ -74,11 +73,8 @@ class Bishop(ChessPiece):
                     currentNode = linlist.head
                     while currentNode:
                         if currentNode['value']:
-                            square = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE))
-                            square.set_alpha(64)
-                            square.fill((0, 255, 0))
-                            display.blit(square, (((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
-                                                  ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE)))
+                            display.blit(HL_SQUARE, (((currentNode['value'][0] * SQUARE_SIZE) - SQUARE_SIZE),
+                                                     ((currentNode['value'][1] * SQUARE_SIZE) - SQUARE_SIZE)))
                         currentNode = currentNode['next']
 
     def validMove(self, mouseP):
