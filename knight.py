@@ -1,5 +1,4 @@
 from chesspiece import ChessPiece, showAMoves, validAMove
-from grid import SQUARE_SIZE, HL_SQUARE
 
 
 class Knight(ChessPiece):

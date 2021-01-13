@@ -1,5 +1,4 @@
 from chesspiece import ChessPiece, showAMoves, validAMove
-from grid import SQUARE_SIZE, HL_SQUARE
 
 
 class King(ChessPiece):
@@ -13,8 +12,11 @@ class King(ChessPiece):
             for j in range(-1, 2):
                 x = self.x + j
                 y = self.y + i
-                if (1 <= x <= 8) and (1 <= y <= 8) and (not piecesDict[x][y]):
-                    self.moves.append((self.x + j, self.y + i))
+                if (1 <= x <= 8) and (1 <= y <= 8):
+                    if not piecesDict[x][y]:
+                        self.moves.append((self.x + j, self.y + i))
+                    elif not piecesDict[x][y].color == self.color:
+                        self.moves.append((self.x + j, self.y + i))
 
     def showMoves(self, display):
         showAMoves(self.moves, display)
