@@ -21,10 +21,38 @@ def changePiece(newPiece, piecesDict):
 
 def updatePiecesLocation(pieceDict, currPiece, mouseP):
     pieceDict[currPiece.x][currPiece.y] = None
-    pieceDict[mouseP[0]][mouseP[1]] = currPiece
     currPiece.move(mouseP)
     if isinstance(currPiece, Pawn):
         currPiece.firstMove = False
+        if currPiece.y == 8 or currPiece.y == 1:
+            currPiece = switchOutPawn(currPiece)
+    pieceDict[mouseP[0]][mouseP[1]] = currPiece
+
+
+def switchOutPawn(currPiece):
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    if currPiece.color:
+                        return Queen(currPiece.x, currPiece.y, "images/whiteQueen.png", 1)
+                    else:
+                        return Queen(currPiece.x, currPiece.y, "images/blackQueen.png", 0)
+                if event.key == pygame.K_r:
+                    if currPiece.color:
+                        return Rook(currPiece.x, currPiece.y, "images/whiteRook.png", 1)
+                    else:
+                        return Rook(currPiece.x, currPiece.y, "images/blackRook.png", 0)
+                if event.key == pygame.K_b:
+                    if currPiece.color:
+                        return Bishop(currPiece.x, currPiece.y, "images/whiteBishop.png", 1)
+                    else:
+                        return Bishop(currPiece.x, currPiece.y, "images/blackBishop.png", 0)
+                if event.key == pygame.K_k:
+                    if currPiece.color:
+                        return Knight(currPiece.x, currPiece.y, "images/whiteKnight.png", 1)
+                    else:
+                        return Knight(currPiece.x, currPiece.y, "images/blackKnight.png", 0)
 
 
 if __name__ == '__main__':
@@ -152,7 +180,8 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                print(currentPiece.direction)
+                if event.key == pygame.K_a:
+                    print(currentPiece.direction)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
