@@ -7,29 +7,27 @@ class Pawn(ChessPiece):
         self.firstPos = (x, y)
         self.firstMove = True
         self.moves = []
+        self.direction = int((self.y - 5)/abs(self.y - 5)) * -1
 
     def getMoves(self, piecesDict):
-        # get possible moves maybe use a linked list for first move
-        if self.firstMove:
-            if (self.firstPos[0] == self.x) and (self.firstPos[1] == self.y):
-                self.moves = [(self.x, self.y - 1), (self.x, self.y - 2)]
-            else:
-                self.moves = [(self.x, self.y - 1)]
-                self.firstMove = False
-        else:
-            self.moves = [(self.x, self.y - 1)]
+        self.moves = []
+        # get one space ahead
+        if not piecesDict[self.x][self.y + self.direction]:
+            self.moves.append((self.x, self.y + self.direction))
 
-        # go through possible moves and see if any are taken, set to 0
-        try:
-            for i in range(len(self.moves)):
-                if piecesDict[self.moves[i][0]][self.moves[i][1]]:
-                    self.moves[i] = 0
-        except KeyError:
-            print('Possible move is out of bounds. Dont need to handle now because Pawn will switch-out in this case.')
+        # get second space ahead if first move
+        if self.firstMove and not piecesDict[self.x][self.y + (self.direction * 2)]:
+            self.moves.append((self.x, self.y + (self.direction * 2)))
 
-        # if piece above but can move two spaces, prevent from moving to second
-        if not self.moves[0] and self.firstMove:
-            self.moves[1] = 0
+        # get top left move
+        takeLeft = piecesDict[self.x - 1][self.y + self.direction]
+        if takeLeft and not (takeLeft.color == self.color):
+            self.moves.append((self.x - 1, self.y + self.direction))
+
+        # get top right move
+        takeRight = piecesDict[self.x + 1][self.y + self.direction]
+        if takeRight and not (takeRight.color == self.color):
+            self.moves.append((self.x + 1, self.y + self.direction))
 
     def showMoves(self, display):
         showAMoves(self.moves, display)

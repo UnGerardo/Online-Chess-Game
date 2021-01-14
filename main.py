@@ -23,6 +23,8 @@ def updatePiecesLocation(pieceDict, currPiece, mouseP):
     pieceDict[currPiece.x][currPiece.y] = None
     pieceDict[mouseP[0]][mouseP[1]] = currPiece
     currPiece.move(mouseP)
+    if isinstance(currPiece, Pawn):
+        currPiece.firstMove = False
 
 
 if __name__ == '__main__':
@@ -150,10 +152,7 @@ if __name__ == '__main__':
                         currentPiece = changePiece(space, pieceLocations)
 
             if event.type == pygame.KEYDOWN:
-                pass
-                # for i in range(8):
-                #     print(str(i+1) + ' ' + str(pieceLocations[i+1]))
-                # print('break')
+                print(currentPiece.direction)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
