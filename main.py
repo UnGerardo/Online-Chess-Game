@@ -19,17 +19,23 @@ def changePiece(newPiece, piecesDict):
     return newPiece
 
 
-def updatePiecesLocation(pieceDict, currPiece, mouseP):
+def updatePiecesLocation(pieceDict, currPiece, mouseP, screen):
     pieceDict[currPiece.x][currPiece.y] = None
     currPiece.move(mouseP)
     if isinstance(currPiece, Pawn):
         currPiece.firstMove = False
         if currPiece.y == 8 or currPiece.y == 1:
-            currPiece = switchOutPawn(currPiece)
+            currPiece = switchOutPawn(currPiece, screen)
     pieceDict[mouseP[0]][mouseP[1]] = currPiece
 
 
-def switchOutPawn(currPiece):
+def switchOutPawn(currPiece, screen):
+    fontt = pygame.font.Font('font/Roboto-Regular.ttf', 18)
+    text = fontt.render('Press Q, R, B, or K: Q - Queen R - Rook B - Bishop K - Knight',
+                        True, (255, 255, 255), (0, 0, 0))
+    screen.blit(text, (75, 280))
+    pygame.display.update()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -56,6 +62,7 @@ def switchOutPawn(currPiece):
 
 
 if __name__ == '__main__':
+    pygame.init()
     chessGrid = Grid()
     chessGrid.setScreen()
     chessGrid.drawGrid()
@@ -166,7 +173,7 @@ if __name__ == '__main__':
                     if currentPiece.validMove(mousePos):
                         pieceSelected = False
                         pieceLocations[mousePos[0]][mousePos[1]] = None
-                        updatePiecesLocation(pieceLocations, currentPiece, mousePos)
+                        updatePiecesLocation(pieceLocations, currentPiece, mousePos, chessGrid.screen)
 
                     # else if the user selects a piece after another, change selection
                     elif space:
