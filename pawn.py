@@ -20,14 +20,16 @@ class Pawn(ChessPiece):
             self.moves.append((self.x, self.y + (self.direction * 2)))
 
         # get top left move
-        takeLeft = piecesDict[self.x - 1][self.y + self.direction]
-        if takeLeft and not (takeLeft.color == self.color):
-            self.moves.append((self.x - 1, self.y + self.direction))
+        if not self.x == 1:
+            takeLeft = piecesDict[self.x - 1][self.y + self.direction]
+            if takeLeft and not (takeLeft.color == self.color):
+                self.moves.append((self.x - 1, self.y + self.direction))
 
         # get top right move
-        takeRight = piecesDict[self.x + 1][self.y + self.direction]
-        if takeRight and not (takeRight.color == self.color):
-            self.moves.append((self.x + 1, self.y + self.direction))
+        if not self.x == 8:
+            takeRight = piecesDict[self.x + 1][self.y + self.direction]
+            if takeRight and not (takeRight.color == self.color):
+                self.moves.append((self.x + 1, self.y + self.direction))
 
     def showMoves(self, display):
         showAMoves(self.moves, display)
