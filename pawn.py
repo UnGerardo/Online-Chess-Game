@@ -16,7 +16,7 @@ class Pawn(ChessPiece):
             self.moves.append((self.x, self.y + self.direction))
 
         # get second space ahead if first move
-        if self.firstMove and not piecesDict[self.x][self.y + (self.direction * 2)]:
+        if self.firstMove and not piecesDict[self.x][self.y + (self.direction * 2)] and self.moves:
             self.moves.append((self.x, self.y + (self.direction * 2)))
 
         # get top left move
