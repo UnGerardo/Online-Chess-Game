@@ -1,4 +1,4 @@
-from chesspiece import ChessPiece, showAMoves, validAMove
+from pieces.chesspiece import ChessPiece, showAMoves, validAMove
 
 
 class Knight(ChessPiece):

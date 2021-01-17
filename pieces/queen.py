@@ -1,6 +1,6 @@
 # importing bishop and rook like this vs just 'import' prevents circular import error; unsure if good work around
-from bishop import Bishop
-from rook import Rook
+from pieces.bishop import Bishop
+from pieces.rook import Rook
 
 
 class Queen(Bishop, Rook):

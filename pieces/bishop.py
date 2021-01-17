@@ -1,5 +1,5 @@
-from chesspiece import ChessPiece, showLLMoves, validLLMove
-from linkedlist import LinkedList
+from pieces.chesspiece import ChessPiece, showLLMoves, validLLMove
+from pieces.linkedlist import LinkedList
 
 
 class Bishop(ChessPiece):

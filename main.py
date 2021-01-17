@@ -1,11 +1,11 @@
 import pygame
 import math
-from pawn import Pawn
-from bishop import Bishop
-from rook import Rook
-from knight import Knight
-from queen import Queen
-from king import King
+from pieces.pawn import Pawn
+from pieces.bishop import Bishop
+from pieces.rook import Rook
+from pieces.knight import Knight
+from pieces.queen import Queen
+from pieces.king import King
 from grid import Grid, SQUARE_SIZE
 
 
