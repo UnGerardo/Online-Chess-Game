@@ -30,10 +30,7 @@ def updatePiecesLocation(pieceDict, currPiece, mouseP, screen):
 
 
 def switchOutPawn(currPiece, screen):
-    fontt = pygame.font.Font('font/Roboto-Regular.ttf', 18)
-    text = fontt.render('Press Q, R, B, or K: Q - Queen R - Rook B - Bishop K - Knight',
-                        True, (255, 255, 255), (0, 0, 0))
-    screen.blit(text, (75, 280))
+    screen.blit(switchText, (75, 280))
     pygame.display.update()
 
     while True:
@@ -151,9 +148,12 @@ if __name__ == '__main__':
             8: Rook(8, 8, "images/whiteRook.png", 1)
         }
     }
-    mousePos = (0, 0)
+    gameFont = pygame.font.Font('font/Roboto-Regular.ttf', 18)
+    switchText = gameFont.render('Press Q, R, B, or K: Q - Queen R - Rook B - Bishop K - Knight',
+                                 True, (255, 255, 255), (0, 0, 0))
     pieceSelected = False
     currentPiece = None  # :: see if could ever be undefined and used
+    colorWin = ''
     playing = True
     # Game loop
     while playing:
@@ -161,34 +161,41 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 playing = False
 
-            # on click
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = (getMousePosition(0), getMousePosition(1))
-                space = pieceLocations[mousePos[0]][mousePos[1]]
+            if not colorWin:
+                # on click
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mousePos = (getMousePosition(0), getMousePosition(1))
+                    space = pieceLocations[mousePos[0]][mousePos[1]]
 
-                # if a piece has been selected; change selection or move
-                if pieceSelected:
+                    # if a piece has been selected; change selection or move
+                    if pieceSelected:
 
-                    # if desired move is valid and move if it is, needs to check this first to capture pieces
-                    if currentPiece.validMove(mousePos):
-                        pieceSelected = False
-                        pieceLocations[mousePos[0]][mousePos[1]] = None
-                        updatePiecesLocation(pieceLocations, currentPiece, mousePos, chessGrid.screen)
+                        # if desired move is valid and move if it is, needs to check this first to capture pieces
+                        if currentPiece.validMove(mousePos):
+                            pieceSelected = False
+                            # checks if a king was taken
+                            if isinstance(pieceLocations[mousePos[0]][mousePos[1]], King):
+                                if pieceLocations[mousePos[0]][mousePos[1]].color:
+                                    colorWin = 'Black'
+                                else:
+                                    colorWin = 'White'
+                            pieceLocations[mousePos[0]][mousePos[1]] = None
+                            updatePiecesLocation(pieceLocations, currentPiece, mousePos, chessGrid.screen)
 
-                    # else if the user selects a piece after another, change selection
-                    elif space:
-                        currentPiece.selected = False
-                        currentPiece = changePiece(space, pieceLocations)
+                        # else if the user selects a piece after another, change selection
+                        elif space:
+                            currentPiece.selected = False
+                            currentPiece = changePiece(space, pieceLocations)
 
-                # if a piece has not been selected (starting point)
-                else:
-                    if space:
-                        pieceSelected = True
-                        currentPiece = changePiece(space, pieceLocations)
+                    # if a piece has not been selected (starting point)
+                    else:
+                        if space:
+                            pieceSelected = True
+                            currentPiece = changePiece(space, pieceLocations)
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    print(currentPiece.direction)
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:
+                        print(currentPiece.direction)
 
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
@@ -201,3 +208,7 @@ if __name__ == '__main__':
                     piece.show(chessGrid.screen)
                     if piece.selected:
                         piece.showMoves(chessGrid.screen)
+        if colorWin:
+            winText = gameFont.render(f'{colorWin} won!', True, (255, 255, 255), (0, 0, 0))
+            chessGrid.screen.blit(winText, (75, 280))
+            pygame.display.update()
