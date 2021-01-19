@@ -9,9 +9,9 @@ class Queen(Bishop, Rook):
         self.bMoves = []
         self.rMoves = []
 
-    def getMoves(self, piecesDict):
-        Bishop.getMoves(self, piecesDict)
-        Rook.getMoves(self, piecesDict)
+    def getMoves(self, gameState):
+        Bishop.getMoves(self, gameState)
+        Rook.getMoves(self, gameState)
 
     def showMoves(self, display):
         Bishop.showMoves(self, display)

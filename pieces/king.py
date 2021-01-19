@@ -6,14 +6,14 @@ class King(ChessPiece):
         super().__init__(x, y, image, color)
         self.moves = []
 
-    def getMoves(self, piecesDict):
+    def getMoves(self, gameState):
         self.moves = []
         for i in range(-1, 2):
             for j in range(-1, 2):
                 x = self.x + j
                 y = self.y + i
                 if (1 <= x <= 8) and (1 <= y <= 8):
-                    if (not piecesDict[x][y]) or (not piecesDict[x][y].color == self.color):
+                    if (not gameState[x][y]) or (not gameState[x][y].color == self.color):
                         self.moves.append((self.x + j, self.y + i))
 
     def showMoves(self, display):

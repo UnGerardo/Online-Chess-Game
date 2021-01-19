@@ -9,25 +9,25 @@ class Pawn(ChessPiece):
         self.moves = []
         self.direction = int((self.y - 5)/abs(self.y - 5)) * -1
 
-    def getMoves(self, piecesDict):
+    def getMoves(self, gameState):
         self.moves = []
         # get one space ahead
-        if not piecesDict[self.x][self.y + self.direction]:
+        if not gameState[self.x][self.y + self.direction]:
             self.moves.append((self.x, self.y + self.direction))
 
         # get second space ahead if first move
-        if self.firstMove and not piecesDict[self.x][self.y + (self.direction * 2)] and self.moves:
+        if self.firstMove and not gameState[self.x][self.y + (self.direction * 2)] and self.moves:
             self.moves.append((self.x, self.y + (self.direction * 2)))
 
         # get top left move
         if not self.x == 1:
-            takeLeft = piecesDict[self.x - 1][self.y + self.direction]
+            takeLeft = gameState[self.x - 1][self.y + self.direction]
             if takeLeft and not (takeLeft.color == self.color):
                 self.moves.append((self.x - 1, self.y + self.direction))
 
         # get top right move
         if not self.x == 8:
-            takeRight = piecesDict[self.x + 1][self.y + self.direction]
+            takeRight = gameState[self.x + 1][self.y + self.direction]
             if takeRight and not (takeRight.color == self.color):
                 self.moves.append((self.x + 1, self.y + self.direction))
 

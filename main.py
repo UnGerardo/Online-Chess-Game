@@ -64,7 +64,7 @@ if __name__ == '__main__':
     chessGrid.setScreen()
     chessGrid.drawGrid()
 
-    pieceLocations = {
+    gameState = {
         # columns - x - top left (1,1)
         1: {
             # rows - y
@@ -165,7 +165,7 @@ if __name__ == '__main__':
                 # on click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mousePos = (getMousePosition(0), getMousePosition(1))
-                    space = pieceLocations[mousePos[0]][mousePos[1]]
+                    space = gameState[mousePos[0]][mousePos[1]]
 
                     # if a piece has been selected; change selection or move
                     if pieceSelected:
@@ -174,24 +174,24 @@ if __name__ == '__main__':
                         if currentPiece.validMove(mousePos):
                             pieceSelected = False
                             # checks if a king was taken
-                            if isinstance(pieceLocations[mousePos[0]][mousePos[1]], King):
-                                if pieceLocations[mousePos[0]][mousePos[1]].color:
+                            if isinstance(gameState[mousePos[0]][mousePos[1]], King):
+                                if gameState[mousePos[0]][mousePos[1]].color:
                                     colorWin = 'Black'
                                 else:
                                     colorWin = 'White'
-                            pieceLocations[mousePos[0]][mousePos[1]] = None
-                            updatePiecesLocation(pieceLocations, currentPiece, mousePos, chessGrid.screen)
+                            gameState[mousePos[0]][mousePos[1]] = None
+                            updatePiecesLocation(gameState, currentPiece, mousePos, chessGrid.screen)
 
                         # else if the user selects a piece after another, change selection
                         elif space:
                             currentPiece.selected = False
-                            currentPiece = changePiece(space, pieceLocations)
+                            currentPiece = changePiece(space, gameState)
 
                     # if a piece has not been selected (starting point)
                     else:
                         if space:
                             pieceSelected = True
-                            currentPiece = changePiece(space, pieceLocations)
+                            currentPiece = changePiece(space, gameState)
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_a:
@@ -200,10 +200,10 @@ if __name__ == '__main__':
         chessGrid.show()
         chessGrid.drawGrid()  # this refreshes the screen correctly stopping multiple green squares from showing
 
-        # loops through pieceLocations dict to show pieces
+        # loops through gameState dict to show pieces
         for col in range(8):
             for row in range(8):
-                piece = pieceLocations[col+1][row+1]
+                piece = gameState[col + 1][row + 1]
                 if piece:
                     piece.show(chessGrid.screen)
                     if piece.selected:

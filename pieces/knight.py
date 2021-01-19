@@ -6,7 +6,7 @@ class Knight(ChessPiece):
         super().__init__(x, y, image, color)
         self.moves = []
 
-    def getMoves(self, piecesDict):
+    def getMoves(self, gameState):
         # reset
         self.moves = []
 
@@ -17,42 +17,42 @@ class Knight(ChessPiece):
         # get top two
         if upShift >= 1:
             if (self.x + 1 <= 8) and \
-               (not piecesDict[self.x + 1][upShift] or
-               (not piecesDict[self.x + 1][upShift].color == self.color)):
+               (not gameState[self.x + 1][upShift] or
+               (not gameState[self.x + 1][upShift].color == self.color)):
                 self.moves.append((self.x + 1, upShift))
             if (self.x - 1 >= 1) and \
-               (not piecesDict[self.x - 1][upShift] or
-               (not piecesDict[self.x - 1][upShift].color == self.color)):
+               (not gameState[self.x - 1][upShift] or
+               (not gameState[self.x - 1][upShift].color == self.color)):
                 self.moves.append((self.x - 1, upShift))
         # get right two
         if rightShift <= 8:
             if (self.y + 1 <= 8) and \
-               (not piecesDict[rightShift][self.y + 1] or
-               (not piecesDict[rightShift][self.y + 1].color == self.color)):
+               (not gameState[rightShift][self.y + 1] or
+               (not gameState[rightShift][self.y + 1].color == self.color)):
                 self.moves.append((rightShift, self.y + 1))
             if (self.y - 1 >= 1) and \
-               (not piecesDict[rightShift][self.y - 1] or
-               (not piecesDict[rightShift][self.y - 1].color == self.color)):
+               (not gameState[rightShift][self.y - 1] or
+               (not gameState[rightShift][self.y - 1].color == self.color)):
                 self.moves.append((rightShift, self.y - 1))
         # get bottom two
         if bottomShift <= 8:
             if (self.x + 1 <= 8) and \
-               (not piecesDict[self.x + 1][bottomShift] or
-               (not piecesDict[self.x + 1][bottomShift].color == self.color)):
+               (not gameState[self.x + 1][bottomShift] or
+               (not gameState[self.x + 1][bottomShift].color == self.color)):
                 self.moves.append((self.x + 1, bottomShift))
             if (self.x - 1 >= 1) and \
-               (not piecesDict[self.x - 1][bottomShift] or
-               (not piecesDict[self.x - 1][bottomShift].color == self.color)):
+               (not gameState[self.x - 1][bottomShift] or
+               (not gameState[self.x - 1][bottomShift].color == self.color)):
                 self.moves.append((self.x - 1, bottomShift))
         # get left two
         if leftShift >= 1:
             if (self.y + 1 <= 8) and \
-               (not piecesDict[leftShift][self.y + 1] or
-               (not piecesDict[leftShift][self.y + 1].color == self.color)):
+               (not gameState[leftShift][self.y + 1] or
+               (not gameState[leftShift][self.y + 1].color == self.color)):
                 self.moves.append((leftShift, self.y + 1))
             if (self.y - 1 >= 1) and \
-               (not piecesDict[leftShift][self.y - 1] or
-               (not piecesDict[leftShift][self.y - 1].color == self.color)):
+               (not gameState[leftShift][self.y - 1] or
+               (not gameState[leftShift][self.y - 1].color == self.color)):
                 self.moves.append((leftShift, self.y - 1))
 
     def showMoves(self, display):

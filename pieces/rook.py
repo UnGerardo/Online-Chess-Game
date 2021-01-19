@@ -7,7 +7,7 @@ class Rook(ChessPiece):
         super().__init__(x, y, image, color)
         self.rMoves = None
 
-    def getMoves(self, piecesDict):
+    def getMoves(self, gameState):
         # reset
         self.rMoves = LinkedList(None)
 
@@ -23,10 +23,10 @@ class Rook(ChessPiece):
             # get top moves - while top is not reached or tStop isn't true
             if (not tStop) and upShift >= 1:
                 tStop = True  # assume piece blocks path - removes need for additional check (if)
-                if not piecesDict[self.x][upShift]:  # if no piece blocks path - add to moves and remove block
+                if not gameState[self.x][upShift]:  # if no piece blocks path - add to moves and remove block
                     self.rMoves.append((self.x, upShift))
                     tStop = False
-                elif not piecesDict[self.x][upShift].color == self.color:  # if there is a piece check color
+                elif not gameState[self.x][upShift].color == self.color:  # if there is a piece check color
                     self.rMoves.append((self.x, upShift))
             else:  # path blocked by piece or top reached
                 tStop = True
@@ -34,10 +34,10 @@ class Rook(ChessPiece):
             # get right moves
             if (not rStop) and rightShift <= 8:
                 rStop = True
-                if not piecesDict[rightShift][self.y]:
+                if not gameState[rightShift][self.y]:
                     self.rMoves.append((rightShift, self.y))
                     rStop = False
-                elif not piecesDict[rightShift][self.y].color == self.color:
+                elif not gameState[rightShift][self.y].color == self.color:
                     self.rMoves.append((rightShift, self.y))
             else:
                 rStop = True
@@ -45,10 +45,10 @@ class Rook(ChessPiece):
             # get bottom moves
             if (not bStop) and bottomShift <= 8:
                 bStop = True
-                if not piecesDict[self.x][bottomShift]:
+                if not gameState[self.x][bottomShift]:
                     self.rMoves.append((self.x, bottomShift))
                     bStop = False
-                elif not piecesDict[self.x][bottomShift].color == self.color:
+                elif not gameState[self.x][bottomShift].color == self.color:
                     self.rMoves.append((self.x, bottomShift))
             else:
                 bStop = True
@@ -56,10 +56,10 @@ class Rook(ChessPiece):
             # get left moves
             if (not lStop) and leftShift >= 1:
                 lStop = True
-                if not piecesDict[leftShift][self.y]:
+                if not gameState[leftShift][self.y]:
                     self.rMoves.append((leftShift, self.y))
                     lStop = False
-                elif not piecesDict[leftShift][self.y].color == self.color:
+                elif not gameState[leftShift][self.y].color == self.color:
                     self.rMoves.append((leftShift, self.y))
             else:
                 lStop = True
