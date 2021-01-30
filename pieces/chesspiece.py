@@ -42,16 +42,16 @@ class ChessPiece:
     def __init__(self, x, y, image, color):
         self.x = x
         self.y = y
-        self.image = pygame.image.load(image)
-        # 0 is for black and 1 is for white
+        self.image = image
+        # 0 is for white and 1 is for black
         self.color = color
         self.selected = False
 
+    # mod will allow the opponent to see the pieces in the correct orientation for themselves
     def show(self, display):
-        display.blit(self.image, (
-                                 ((self.x * SQUARE_SIZE) - SQUARE_SIZE),
-                                 ((self.y * SQUARE_SIZE) - SQUARE_SIZE)
-                                 ))
+        display.blit(pygame.image.load(self.image), (
+            ((self.x * SQUARE_SIZE) - SQUARE_SIZE),
+            ((self.y * SQUARE_SIZE) - SQUARE_SIZE)))
 
     def move(self, mousePos):
         self.selected = False

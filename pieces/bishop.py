@@ -23,10 +23,10 @@ class Bishop(ChessPiece):
             # get top right bMoves + example of putting conditions on multiple lines
             if (not trStop) and (rightShift <= 8) and (upShift >= 1):
                 trStop = True
-                if not gameState[rightShift][upShift]:
+                if not gameState[f'{rightShift}'][f'{upShift}']:
                     self.bMoves.append((rightShift, upShift))
                     trStop = False
-                elif not gameState[rightShift][upShift].color == self.color:
+                elif not gameState[f'{rightShift}'][f'{upShift}'].color == self.color:
                     self.bMoves.append((rightShift, upShift))
             else:
                 trStop = True
@@ -34,10 +34,10 @@ class Bishop(ChessPiece):
             # get bottom right bMoves
             if (not brStop) and (rightShift <= 8) and (bottomShift <= 8):
                 brStop = True
-                if not gameState[rightShift][bottomShift]:
+                if not gameState[f'{rightShift}'][f'{bottomShift}']:
                     self.bMoves.append((rightShift, bottomShift))
                     brStop = False
-                elif not gameState[rightShift][bottomShift].color == self.color:
+                elif not gameState[f'{rightShift}'][f'{bottomShift}'].color == self.color:
                     self.bMoves.append((rightShift, bottomShift))
             else:
                 brStop = True
@@ -45,10 +45,10 @@ class Bishop(ChessPiece):
             # get bottom left bMoves
             if (not blStop) and (leftShift >= 1) and (bottomShift <= 8):
                 blStop = True
-                if not gameState[leftShift][bottomShift]:
+                if not gameState[f'{leftShift}'][f'{bottomShift}']:
                     self.bMoves.append((leftShift, bottomShift))
                     blStop = False
-                elif not gameState[leftShift][bottomShift].color == self.color:
+                elif not gameState[f'{leftShift}'][f'{bottomShift}'].color == self.color:
                     self.bMoves.append((leftShift, bottomShift))
             else:
                 blStop = True
@@ -56,10 +56,10 @@ class Bishop(ChessPiece):
             # get top left bMoves
             if (not tlStop) and (leftShift >= 1) and (upShift >= 1):
                 tlStop = True
-                if not gameState[leftShift][upShift]:
+                if not gameState[f'{leftShift}'][f'{upShift}']:
                     self.bMoves.append((leftShift, upShift))
                     tlStop = False
-                elif not gameState[leftShift][upShift].color == self.color:
+                elif not gameState[f'{leftShift}'][f'{upShift}'].color == self.color:
                     self.bMoves.append((leftShift, upShift))
             else:
                 tlStop = True

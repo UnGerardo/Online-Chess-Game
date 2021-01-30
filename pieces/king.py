@@ -13,7 +13,7 @@ class King(ChessPiece):
                 x = self.x + j
                 y = self.y + i
                 if (1 <= x <= 8) and (1 <= y <= 8):
-                    if (not gameState[x][y]) or (not gameState[x][y].color == self.color):
+                    if (not gameState[f'{x}'][f'{y}']) or (not gameState[f'{x}'][f'{y}'].color == self.color):
                         self.moves.append((self.x + j, self.y + i))
 
     def showMoves(self, display):

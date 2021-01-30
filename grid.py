@@ -15,7 +15,7 @@ class Grid:
 
     def setScreen(self):
         pygame.display.set_caption("Chess")  # set window title
-        self.screen.fill("#000000")  # setting bg color to black
+        self.screen.fill((0, 0, 0))  # setting bg color to black
 
     def drawGrid(self):
         counter = 0
@@ -24,9 +24,9 @@ class Grid:
             left = 0
             for j in range(8):
                 if counter % 2:
-                    pygame.draw.rect(self.screen, '#222222', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
+                    pygame.draw.rect(self.screen, (34, 34, 34), pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
                 else:
-                    pygame.draw.rect(self.screen, '#cccccc', pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
+                    pygame.draw.rect(self.screen, (204, 204, 204), pygame.Rect(left, top, SQUARE_SIZE, SQUARE_SIZE))
                 left += SQUARE_SIZE
                 counter += 1
             counter += 1
